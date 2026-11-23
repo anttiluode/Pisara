@@ -1,0 +1,263 @@
+[
+ {
+  "seed": 41,
+  "segments": [
+   {
+    "regime": "periodic",
+    "base": 300.0,
+    "clock": 2.4200405217819694,
+    "in_step": 2.4834484013064064,
+    "describing": 2.419042082660301,
+    "both": 2.4819699727718807,
+    "both_feature": 2.415318161982858,
+    "share_echo": 0.40588235294117647,
+    "delay_end": 300.17399974952167,
+    "tau_end": 63.01758841985383
+   },
+   {
+    "regime": "periodic",
+    "base": 420.0,
+    "clock": 8.516697712633407,
+    "in_step": 11.515129043785324,
+    "describing": 6.35292594661727,
+    "both": 6.823384354337191,
+    "both_feature": 8.571859243903141,
+    "share_echo": 0.245,
+    "delay_end": 419.26142465189844,
+    "tau_end": 78.30191161034696
+   },
+   {
+    "regime": "period2",
+    "base": 360.0,
+    "clock": 60.76849434104831,
+    "in_step": 50.91840548753255,
+    "describing": 10.389536920563193,
+    "both": 11.470132117305681,
+    "both_feature": 10.3315431835906,
+    "share_echo": 0.01,
+    "delay_end": 346.47155351855224,
+    "tau_end": 76.9476580228013
+   },
+   {
+    "regime": "chaotic",
+    "base": 300.0,
+    "clock": 39.15312946874608,
+    "in_step": 51.36798661190449,
+    "describing": 13.977385999087176,
+    "both": 13.977385999087176,
+    "both_feature": 14.809919621529758,
+    "share_echo": 0.0,
+    "delay_end": 316.19459228382226,
+    "tau_end": 70.17946478302778
+   },
+   {
+    "regime": "draining",
+    "base": 300.0,
+    "clock": 85.9273116118836,
+    "in_step": 236.83751698870307,
+    "describing": 45.174606771093934,
+    "both": 45.174606771093934,
+    "both_feature": 42.78545936414512,
+    "share_echo": 0.0,
+    "delay_end": 1425.9929294250032,
+    "tau_end": 74.93100037543893
+   },
+   {
+    "regime": "periodic",
+    "base": 300.0,
+    "clock": 6.949828064575108,
+    "in_step": 22.00168813175751,
+    "describing": 6.4528027777966495,
+    "both": 6.267288122366406,
+    "both_feature": 9.214451937998142,
+    "share_echo": 0.29,
+    "delay_end": 1500.0,
+    "tau_end": 65.71074609431899
+   }
+  ],
+  "clock_overall": 35.1100882483109,
+  "clock_post_switch": 56.51629716906756,
+  "in_step_overall": 63.06073239539301,
+  "in_step_post_switch": 158.97034111624302,
+  "describing_overall": 14.392462548813082,
+  "describing_post_switch": 52.34408630849072,
+  "both_overall": 14.615931470959065,
+  "both_post_switch": 56.2787081049088,
+  "both_feature_overall": 14.987592692853083,
+  "both_feature_post_switch": 57.386742875865096
+ },
+ {
+  "seed": 42,
+  "segments": [
+   {
+    "regime": "periodic",
+    "base": 300.0,
+    "clock": 2.2170435436267084,
+    "in_step": 2.416229753191319,
+    "describing": 2.292265354733256,
+    "both": 2.331034894492845,
+    "both_feature": 2.3017032817604304,
+    "share_echo": 0.3764705882352941,
+    "delay_end": 298.8191039242624,
+    "tau_end": 63.03581440960849
+   },
+   {
+    "regime": "periodic",
+    "base": 420.0,
+    "clock": 8.530100292540348,
+    "in_step": 11.498219676320103,
+    "describing": 6.149729505390308,
+    "both": 6.2334188895673215,
+    "both_feature": 8.278335525682058,
+    "share_echo": 0.145,
+    "delay_end": 420.0462507152266,
+    "tau_end": 78.31515058986128
+   },
+   {
+    "regime": "period2",
+    "base": 360.0,
+    "clock": 60.429386177267624,
+    "in_step": 52.074676925058284,
+    "describing": 10.556702917065495,
+    "both": 10.556702917065495,
+    "both_feature": 10.274368053076751,
+    "share_echo": 0.0,
+    "delay_end": 348.31546821123413,
+    "tau_end": 76.92188180650743
+   },
+   {
+    "regime": "chaotic",
+    "base": 300.0,
+    "clock": 38.67830828651208,
+    "in_step": 57.96654222571501,
+    "describing": 13.953883829087705,
+    "both": 13.953883829087705,
+    "both_feature": 15.269771110798231,
+    "share_echo": 0.0,
+    "delay_end": 331.57148982790295,
+    "tau_end": 70.17481388573675
+   },
+   {
+    "regime": "draining",
+    "base": 300.0,
+    "clock": 86.53338756679926,
+    "in_step": 243.10904847468078,
+    "describing": 44.36355086579885,
+    "both": 44.36355086579885,
+    "both_feature": 41.48104511276331,
+    "share_echo": 0.0,
+    "delay_end": 1445.298599999986,
+    "tau_end": 75.06351774962899
+   },
+   {
+    "regime": "periodic",
+    "base": 300.0,
+    "clock": 6.985184839650642,
+    "in_step": 25.101063923494593,
+    "describing": 7.215814288967756,
+    "both": 6.323901535973192,
+    "both_feature": 8.779795166030429,
+    "share_echo": 0.28,
+    "delay_end": 1492.5275130000025,
+    "tau_end": 65.79019197026979
+   }
+  ],
+  "clock_overall": 35.02047375088326,
+  "clock_post_switch": 56.39931214048836,
+  "in_step_overall": 66.26560907532895,
+  "in_step_post_switch": 164.54388667671034,
+  "describing_overall": 14.35670060982319,
+  "describing_post_switch": 52.88483523213701,
+  "both_overall": 14.234610962575644,
+  "both_post_switch": 52.88483523213701,
+  "both_feature_overall": 14.751913120196264,
+  "both_feature_post_switch": 57.48102546332753
+ },
+ {
+  "seed": 43,
+  "segments": [
+   {
+    "regime": "periodic",
+    "base": 300.0,
+    "clock": 2.6280892733188517,
+    "in_step": 2.7047533619192716,
+    "describing": 2.6661005479499136,
+    "both": 2.776735076359861,
+    "both_feature": 2.7794871295063874,
+    "share_echo": 0.45294117647058824,
+    "delay_end": 297.6627588537004,
+    "tau_end": 63.01190892505707
+   },
+   {
+    "regime": "periodic",
+    "base": 420.0,
+    "clock": 8.389518512437006,
+    "in_step": 11.349012387608349,
+    "describing": 6.16647477517135,
+    "both": 6.2056395448368,
+    "both_feature": 8.36663430438801,
+    "share_echo": 0.33,
+    "delay_end": 419.0020212513053,
+    "tau_end": 78.33569215834166
+   },
+   {
+    "regime": "period2",
+    "base": 360.0,
+    "clock": 60.566673687423,
+    "in_step": 50.831877917610875,
+    "describing": 10.867648755204513,
+    "both": 10.867648755204513,
+    "both_feature": 10.374667459578696,
+    "share_echo": 0.0,
+    "delay_end": 351.3666736313909,
+    "tau_end": 76.92529040440118
+   },
+   {
+    "regime": "chaotic",
+    "base": 300.0,
+    "clock": 38.07246101902367,
+    "in_step": 61.082706160472334,
+    "describing": 14.115696064953445,
+    "both": 14.115696064953445,
+    "both_feature": 15.903815821214597,
+    "share_echo": 0.0,
+    "delay_end": 332.5312983782766,
+    "tau_end": 70.15425655734023
+   },
+   {
+    "regime": "draining",
+    "base": 300.0,
+    "clock": 85.44364256376164,
+    "in_step": 238.19056611829365,
+    "describing": 44.63872866881715,
+    "both": 44.63872866881715,
+    "both_feature": 42.162224282839595,
+    "share_echo": 0.0,
+    "delay_end": 1463.4,
+    "tau_end": 74.86148303805273
+   },
+   {
+    "regime": "periodic",
+    "base": 300.0,
+    "clock": 6.522661408638213,
+    "in_step": 29.2604034188651,
+    "describing": 6.115838600867172,
+    "both": 5.85031687428083,
+    "both_feature": 9.1057992761992,
+    "share_echo": 0.265,
+    "delay_end": 1497.1619999999937,
+    "tau_end": 65.71923710215009
+   }
+  ],
+  "clock_overall": 34.68741158789234,
+  "clock_post_switch": 55.83510496164118,
+  "in_step_overall": 66.70156841586108,
+  "in_step_post_switch": 166.53582631741108,
+  "describing_overall": 14.366680372165005,
+  "describing_post_switch": 54.56334193820467,
+  "both_overall": 14.345842953618165,
+  "both_post_switch": 54.56334193820467,
+  "both_feature_overall": 15.153954821245328,
+  "both_feature_post_switch": 58.04060370785965
+ }
+]

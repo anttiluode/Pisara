@@ -137,6 +137,33 @@ The delay learned online by the decorrelating loop vs the autocorrelation zero c
 - The Fraser–Swinney mutual-information curve is jagged, and its "first minimum" of 30 ms is probably a binning artifact. It still embeds about as well.
 - Periodic and shuffled: nothing beats the clock, as expected. Nearest neighbours overfit to 1.05–1.15.
 
+## Gate 4: one neuron, both rules
+
+**Setup.** One unit has two loops on the same drops:
+- an **in-step** loop (coincidence delay; its echo forecasts the next drop);
+- a **describing** loop (decorrelating delay τ). The slow trace at t, t − τ, …, t − 6τ is the unit's state, and the next interval is forecast by nearest analogues among states it has already lived through.
+
+**Two pairings:**
+- **gate**: trust whichever loop has been right lately;
+- **feature**: the echo's expectation added as one more coordinate of the state.
+
+**Run.** Fully online, one pass, on a switching world: clock 300 → clock 420 → period-two → chaotic → draining → clock 300. Fresh seeds 41–43. One smoke run on seed 9 came before the frozen run, and the post-switch metric and the feature pairing were added after it. Mean absolute error in ms:
+
+| | running clock | in-step alone | describing alone | both (gate) | both (feature) |
+|---|---:|---:|---:|---:|---:|
+| overall, seeds 41/42/43 | 35.1 / 35.0 / 34.7 | 63.1 / 66.3 / 66.7 | **14.4 / 14.4 / 14.4** | 14.6 / 14.2 / 14.3 | 15.0 / 14.8 / 15.2 |
+| first 15 drops after each switch | 56.5 / 56.4 / 55.8 | 159 / 165 / 167 | **52.3 / 52.9 / 54.6** | 56.3 / 52.9 / 54.6 | 57.4 / 57.5 / 58.0 |
+
+**Kill condition met: the pairing adds nothing to forecasting.**
+- The gate ties the describing loop overall (±0.2 ms) and never beats it after switches.
+- The feature pairing is slightly worse everywhere except draining (42 vs 45 ms).
+
+The in-step loop is held back by the Gate 2 failures. On period-two it sits at the mean (≈ 348 ms, 51 ms error). On draining it ratchets to ≈ 1450 ms and stays there.
+
+**What did work.** The describing loop alone is local and online, with one learned delay and memory of past states. It beats the running clock 2.4× overall, and 3.6–5.8× on period-two, chaotic and draining.
+
+So in this model, interval forecasting is the describing loop's job. The in-step loop's remaining value is what Gate 2C showed: timing, such as rising on schedule when a drop is missing. Forecasting the size of the next interval did not test that.
+
 ## Ledger (Gates 1–2)
 
 **Verified**
@@ -161,7 +188,8 @@ The delay learned online by the decorrelating loop vs the autocorrelation zero c
 
 - **Luotain2 audit** of the virtual-node sheet (node × cycle as a 2D field), with Sol's control: the same audit with the node order scrambled. A law that survives scrambling came from the arrangement, not the dynamics.
 - **Delay-jitter lesion**: make conduction timing unreliable and measure how fast the anticipation collapses. This is a model property, not a model of disease.
-- **One neuron, both rules**: a coincidence loop (anticipation) and a decorrelating loop (representation) in the same unit. Does the pair beat either alone on the switching world?
+- **Test the in-step loop on its own job**: an omission and surprise task (detect a missing or early drop as fast as possible), where the describing loop has no natural advantage. Only there can the pair earn its keep.
+- **Fix the in-step loop's basins** (mean basin on period-two, harmonic ratchet on draining) before pairing again.
 - **Learn the multiples too**: a chain where each loop decorrelates from the one before, instead of hand-given 1…6 τ.
 - **Matched capacity** (Dambre et al. 2012), so the loop and the window are compared at the same memory budget.
 - **A knobs page**: drag the flow and the delay, and watch the loop lock and slip.
@@ -174,6 +202,7 @@ python -m pytest -q tests          # 5 tests, < 2 s
 python scripts/run_gate1.py        # -> results/gate1.json   (~25 s with numba)
 python scripts/run_gate2.py        # -> results/gate2.json
 python scripts/run_gate3.py        # -> results/gate3.json   (~20 s)
+python scripts/run_gate4.py        # -> results/gate4.json   (~5 s)
 python scripts/make_figures.py     # -> fig/
 ```
 
