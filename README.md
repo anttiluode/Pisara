@@ -19,7 +19,7 @@ Neon (Gemini) audited the code and results. Everything below is fixed and re-run
 
 1. **The quadratic baseline was handicapped.** Products were taken of uncentred intervals (200–400 ms), where T and T² are almost collinear, and the ridge penalty shrank the curvature away. Intervals are now centred on the training mean before products. Chaotic quadratic history went from 0.031–0.049 to **0.008–0.009 NMSE**. It now **beats** the no-loop window (0.012). My Gate 1 claim that the window "beat explicit regression on the chaotic faucet" was wrong.
 2. **Numerical blow-ups.** Standardising a virtual node that no drop reached in training divided by ~1e-12, giving test NMSE up to 2·10¹⁴ for some delays. Column scales are now floored at 1% of the largest. Gate 1 chaotic seed 13 (no-loop) went from 0.079 to **0.0125**: the old value was a validation pick hurt by the blow-up.
-3. **The omission result depended on the starting delay.** Gate 2C started the loop at 520 ms, inside the good basin. Now it starts from every value 150–900 ms. It works (rise at >90% of missing drops, median onset error < 15 ms) from **81% / 38% / 38%** of starts on seeds 21/22/23; the rest fall into the mean basin. New control, a damped resonator kicked by the drops, with its period chosen on half the omissions: it also rises at missing drops (91–100%), but at the wrong time, median error **52–68 ms**. A resonator tuned to the 600 ms repeat did not work at all (rise at 5–23%). Where the loop locks, its 4–5 ms timing is something the resonator cannot do.
+3. **The omission result depended on the starting delay.** Gate 2C started the loop at 520 ms, inside the good basin. Now it starts from every value 150–900 ms. It locks into the true 600 ms basin (median onset error 3–4 ms) from **6 of 16 starts (37.5%) on every seed**; starts below ~450–500 ms fall into the mean basin (error 14.5–22 ms) and starts above ~750–800 into the 900 ms harmonic (21–30 ms). (An earlier version of this line said 81% for seed 21: its mean basin scraped under a 15 ms cutoff. Neon's second audit caught it.) New control, a damped resonator kicked by the drops, with its period chosen on half the omissions: it also rises at missing drops (91–100%), but at the wrong time, median error **52–68 ms**. A resonator tuned to the 600 ms repeat did not work at all (rise at 5–23%). Where the loop locks, its 4–5 ms timing is something the resonator cannot do.
 4. **Gate 3's chaotic win was mostly coverage.** The coincidence loops had no delays below ~260 ms, while one interval of history is all the 1-D chaotic map needs. A fixed short ladder (50…300 ms) ties the learned decorrelation delay there (0.012–0.014). So Gate 3 was re-run with a **two-dimensional** world, the Hénon map (the next interval needs the last two). There the learned τ matters (table below).
 
 Neon also suggested "one neuron, both rules"; that is Gate 4 (killed).
@@ -107,7 +107,7 @@ Seeds 21, 22, 23.
 
 ![learned delay](fig/learned_delay_switch.png)
 
-**C. Omission.** In period-two, 10% of the drops were removed. Started at 520 ms, the loop with a learned delay rose at the time of **every** missing drop, onset error 3.8–5.3 ms; a no-loop unit produced none. Started from anywhere in 150–900 ms, it works from 81% / 38% / 38% of starts (the rest sit in the mean basin). A damped resonator kicked by the drops also rises at missing drops but 52–68 ms off. That is silence becoming a signal, *when the loop is in the right basin*.
+**C. Omission.** In period-two, 10% of the drops were removed. Started at 520 ms, the loop with a learned delay rose at the time of **every** missing drop, onset error 3.8–5.3 ms; a no-loop unit produced none. Started from anywhere in 150–900 ms, it finds the 600 ms basin from 37.5% of starts on every seed (the rest sit in the mean basin or the 900 ms harmonic). A damped resonator kicked by the drops also rises at missing drops but 52–68 ms off. That is silence becoming a signal, *when the loop is in the right basin*.
 
 ## Gate 3: can competing loops grow their own Takens embedding?
 
@@ -216,7 +216,7 @@ Fresh seeds 51–53.
 | 40 ms | 244–246 | 62–74% / 35–45 | 0.270–0.281 |
 
 Neon's prediction was that being in step collapses within a few ms while describing degrades gracefully. The result is **half right**:
-- **The echo forecast collapses first**, about 10× worse at 5 ms of jitter. My probable reading, not verified: smeared recirculating echoes cross the threshold early.
+- ~~**The echo forecast collapses first**, about 10× worse at 5 ms of jitter.~~ **Withdrawn (Gate 7A):** this was mostly a detector artifact. The echo was scored on the raw return with a first-crossing trigger and a mean, unlike the omission test. With matched detectors it holds up to ~5 ms.
 - **The omission response is the most robust of all.** It still rises at every missing drop up to 10 ms of jitter, with onset error growing roughly with the jitter itself.
 - **The embedding degrades steadily**: 2.3× worse at 5 ms, 4.5× at 10 ms.
 
@@ -236,7 +236,7 @@ Fresh seeds 61–63.
 | 62 | 4.0 (100%) | 113.8 | 4.0 |
 | 63 | 5.0 (100%) | 59.5 | 4.0 |
 
-The loop beats an averaging clock 12–28×, but it only **ties** the explicit period-two clock: it *is* that clock, built from a delay line instead of an algorithm. In this world it adds no capability beyond the algorithm, only a different, readout-free embodiment of it. Elsewhere it is also limited by its basins (Gate 2C: works from 38–81% of starts).
+The loop beats an averaging clock 12–28×, but it only **ties** the explicit period-two clock: it *is* that clock, built from a delay line instead of an algorithm. In this world it adds no capability beyond the algorithm, only a different, readout-free embodiment of it. It is also limited by its basins (Gate 2C: 37.5% of starts). **See Gate 7B: on mean error the picture changes.**
 
 **B. Does the describing loop need its archive?** Gates 3–5 forecast with nearest neighbours, a store of past states outside the loop (Sol's point). Here the archive is replaced by fixed weights learned once, i.e. memory in synapses. Hénon world, learned τ…6τ, NMSE:
 
@@ -248,6 +248,42 @@ The loop beats an averaging clock 12–28×, but it only **ties** the explicit p
 
 A linear readout of the embedding fails. Fixed quadratic weights recover most of the way (2× the archive's error). So the archive carries real value, but most of it can move into fixed synaptic weights, provided the readout can multiply coordinates. That is coincidence detection again, now in the readout rather than in the delay.
 
+## Gate 7: Neon's second audit
+
+**A. Gate 5B rematch with matched detectors** (same seeds 51–53). The echo forecast is scored on the raw return (as in Gate 5B) and on the return smoothed by the soma's own 5 ms leak. Mean / median error in ms, and the share of forecasts more than 100 ms early:
+
+| jitter | raw return: mean / median / early | smoothed return: mean / median / early |
+|---|---|---|
+| 0 ms | 4.5–6.2 / 3.5–3.8 / 0–1% | 6.8–6.9 / 6.0–6.2 / 0% |
+| 2 ms | 8.9–10.5 / 3.7–4.0 / 2–3% | 6.9–8.1 / 5.9–6.4 / 0–1% |
+| 5 ms | 51–62 / 6.4–7.1 / 19–22% | **9.4–12.3 / 6.0–6.2 / 1–2%** |
+| 10 ms | 119–134 / 26–153 / 46–50% | 26–36 / 9.2–9.4 / 6–10% |
+| 20 ms | 202–210 / 203–206 / 78–79% | 108–115 / 34–46 / 39–41% |
+
+Neon was right: the Gate 5B "10× collapse at 5 ms" came from about 20% early false triggers on the raw, jittered return. With the smoothed return the echo forecast is as robust as the omission rise up to about 5 ms, bends at 10 ms and fails at 20 ms. The honest summary of Gate 5B is now: **the in-step loop (echo and omission alike) tolerates about 5–10 ms of conduction jitter; the embedding degrades steadily from the first few ms.**
+
+**B. Gate 6A with mean error** (same seeds 61–63, ≈ 57 omissions each, about a third of them within three drops of another omission):
+
+| seed | loop: mean / median / mean right after another omission | clock (median of last 20): mean / median / after | clock (interval two back): mean / median / after |
+|---|---|---|---|
+| 61 | **5.5 / 5.0 / 6.2** | 88 / 62 / 142 | 89 / 5.0 / 257 |
+| 62 | **5.3 / 4.0 / 7.5** | 116 / 114 / 210 | 109 / 4.0 / 316 |
+| 63 | **5.5 / 5.0 / 6.6** | 101 / 60 / 200 | 92 / 4.0 / 284 |
+
+This changes Gate 6A. The explicit period-two clock ties the loop only in the median. When an earlier omission has corrupted its history, it breaks: 257–316 ms errors. Its mean error is 16–20× the loop's. The loop barely notices, because its echoes keep recirculating through a missing drop and carry the rhythm across the gap.
+
+So the loop does beat this adaptive clock, on robustness to missing input. A cleverer algorithm that detects doubled intervals could repair the clock. The loop does that repair for free.
+
+**C. A bank of leaks instead of a hand-matched one** (fresh seeds 71–73). Three traces with leaks 50, 150 and 450 ms each learn their own decorrelating τ, at τ…3τ (12 coordinates). Compared with the single 100 ms leak at τ…6τ, on Hénon at three timescales. NMSE:
+
+| base interval | single leak: neighbours / quadratic weights | leak bank: neighbours / quadratic weights |
+|---|---|---|
+| 150 ms | 0.012–0.013 / 0.096–0.114 | 0.017–0.020 / **0.017** |
+| 300 ms | **0.008–0.009 / 0.017–0.019** | 0.019–0.022 / 0.066–0.067 |
+| 600 ms | 0.081–0.087 / 0.075–0.076 (fails) | **0.010–0.011** / 0.035–0.036 |
+
+The bank never fails. Its worst nearest-neighbour score is 0.022, against 0.087 for the single leak. But it loses to the single leak wherever that leak happens to match the world (300 ms): robustness bought with peak performance. A rule that *learns* the leak, not just the delay, is the open step.
+
 ## Ledger (Gates 1–2)
 
 **Verified**
@@ -258,7 +294,7 @@ A linear readout of the embedding fails. Fixed quadratic weights recover most of
   The timing of the last drops becomes a *place* in the window, and a linear readout of the place handles nonlinear maps without being told their form.
 - With no readout at all, the loop's own echo forecasts the period-two faucet to within 3.7–4.0 ms (clock: 60 ms). It does this when D equals the full 600 ms repeat: the echo of the drop two back arrives with the next drop.
 - The coincidence rule learns the clock period from anywhere within about ±150 ms of it. It follows a jump from 300 to 420 ms within a few drops, where any single fixed delay fails (240 ms error).
-- Omitted drops produce on-time rises (Part C) when the loop is in the right basin (38–81% of starts); a resonator rises too but 52–68 ms off.
+- Omitted drops produce on-time rises (Part C) when the loop is in the right basin (37.5% of starts); a resonator rises too but 52–68 ms off.
 - Controls: on shuffled and iid intervals, no method beats the clock. The readouts overfit slightly, to NMSE 1.06–1.12.
 
 **Failed or open**
@@ -289,6 +325,7 @@ python scripts/run_gate3.py        # -> results/gate3.json   (~20 s)
 python scripts/run_gate4.py        # -> results/gate4.json   (~5 s)
 python scripts/run_gate5.py        # -> results/gate5.json
 python scripts/run_gate6.py        # -> results/gate6.json
+python scripts/run_gate7.py        # -> results/gate7.json   (~15 s)
 python scripts/make_figures.py     # -> fig/
 ```
 
