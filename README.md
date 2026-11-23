@@ -224,6 +224,30 @@ So "in step" is not one thing. A *threshold-crossing forecast* is fragile, while
 
 A smoke run on seed 9 first used independent jitter every millisecond. That shredded the echo into spurious crossings already at 1 ms, a detector artifact, so the jitter was made coherent before the frozen run.
 
+## Gate 6: Sol's questions (adaptive clock; does the describing loop need its archive?)
+
+Fresh seeds 61–63.
+
+**A. Omission timing against an adaptive clock.** Period-two with 10% of drops removed. Median error in ms of *when* each system expects the missing drop:
+
+| seed | loop, D = 600 | clock: last drop + median of last 20 intervals | clock: last drop + the interval two back |
+|---|---:|---:|---:|
+| 61 | 5.0 (rise at 100%) | 62.0 | 5.0 |
+| 62 | 4.0 (100%) | 113.8 | 4.0 |
+| 63 | 5.0 (100%) | 59.5 | 4.0 |
+
+The loop beats an averaging clock 12–28×, but it only **ties** the explicit period-two clock: it *is* that clock, built from a delay line instead of an algorithm. In this world it adds no capability beyond the algorithm, only a different, readout-free embodiment of it. Elsewhere it is also limited by its basins (Gate 2C: works from 38–81% of starts).
+
+**B. Does the describing loop need its archive?** Gates 3–5 forecast with nearest neighbours, a store of past states outside the loop (Sol's point). Here the archive is replaced by fixed weights learned once, i.e. memory in synapses. Hénon world, learned τ…6τ, NMSE:
+
+| seed | nearest neighbours (archive) | fixed linear weights | fixed quadratic weights |
+|---|---:|---:|---:|
+| 61 | 0.008 | 0.359 | 0.018 |
+| 62 | 0.009 | 0.364 | 0.018 |
+| 63 | 0.009 | 0.359 | 0.017 |
+
+A linear readout of the embedding fails. Fixed quadratic weights recover most of the way (2× the archive's error). So the archive carries real value, but most of it can move into fixed synaptic weights, provided the readout can multiply coordinates. That is coincidence detection again, now in the readout rather than in the delay.
+
 ## Ledger (Gates 1–2)
 
 **Verified**
@@ -264,6 +288,7 @@ python scripts/run_gate2.py        # -> results/gate2.json
 python scripts/run_gate3.py        # -> results/gate3.json   (~20 s)
 python scripts/run_gate4.py        # -> results/gate4.json   (~5 s)
 python scripts/run_gate5.py        # -> results/gate5.json
+python scripts/run_gate6.py        # -> results/gate6.json
 python scripts/make_figures.py     # -> fig/
 ```
 
