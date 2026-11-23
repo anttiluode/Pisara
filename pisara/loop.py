@@ -37,20 +37,34 @@ except ImportError:                      # runs without numba, just slower
 
 
 @njit(cache=True)
-def _run(s, D0, beta, gamma, theta, eta, learn, Dmin, Dmax, slope_ms, window):
+def _seed(k):
+    np.random.seed(k)
+
+
+@njit(cache=True)
+def _run(s, D0, beta, gamma, theta, eta, learn, Dmin, Dmax, slope_ms, window, jitter):
     n = s.shape[0]
     x = np.zeros(n)
+    e_rx = np.zeros(n)
     Dtrace = np.zeros(n)
     D = D0
     a = 1.0 / theta
+    xi = 0.0
+    tc = 20.0                             # jitter correlation time, ms
     for t in range(1, n):
         # echo by linear interpolation at fractional delay
         pos = t - 1 - D
+        if jitter > 0:                    # unreliable conduction: the return arrives early
+            # or late by xi, a slowly wandering offset (SD = jitter, ~20 ms memory),
+            # so a returning pulse is shifted as a whole rather than shredded
+            xi += -xi / tc + jitter * math.sqrt(2.0 / tc) * np.random.normal()
+            pos += xi
         echo = 0.0
         if pos >= 1.0:
             i = int(pos)
             f = pos - i
             echo = (1 - f) * x[i] + f * x[i + 1]
+        e_rx[t] = echo
         x[t] = x[t - 1] + a * (-x[t - 1] + math.tanh(beta * echo + gamma * s[t - 1]))
         # drop onset: rising edge of the drip pulse
         if learn and s[t - 1] > 0.5 and (t < 2 or s[t - 2] < 0.5):
@@ -74,15 +88,19 @@ def _run(s, D0, beta, gamma, theta, eta, learn, Dmin, Dmax, slope_ms, window):
                 if D > Dmax:
                     D = Dmax
         Dtrace[t] = D
-    return x, Dtrace
+    return x, Dtrace, e_rx
 
 
 def run(s, D, beta=0.9, gamma=3.0, theta=5.0, eta=0.0, Dmin=30.0, Dmax=1500.0,
-        slope_ms=3, window=150):
-    """Simulate the loop on drip train s. eta > 0 learns the delay."""
-    return _run(np.asarray(s, dtype=np.float64), float(D), float(beta), float(gamma),
-                float(theta), float(eta), eta > 0, float(Dmin), float(Dmax), int(slope_ms),
-                int(window))
+        slope_ms=3, window=150, jitter=0.0, seed=0, return_echo=False):
+    """Simulate the loop on drip train s. eta > 0 learns the delay.
+    jitter (ms, SD) makes the returning signal arrive early or late at random
+    (the lesion). With return_echo the received return e(t) is also given."""
+    _seed(int(seed))
+    x, Dt, e = _run(np.asarray(s, dtype=np.float64), float(D), float(beta), float(gamma),
+                    float(theta), float(eta), eta > 0, float(Dmin), float(Dmax), int(slope_ms),
+                    int(window), float(jitter))
+    return (x, Dt, e) if return_echo else (x, Dt)
 
 
 def virtual_nodes(x, times, D, N=50):
@@ -98,7 +116,7 @@ def virtual_nodes(x, times, D, N=50):
     return out
 
 
-def echo_forecast(x, drop_times, D, pulse_ms=10, refractory=30, thr=0.25):
+def echo_forecast(x, drop_times, D, pulse_ms=10, refractory=30, thr=0.25, received=None):
     """Physical forecast with no readout: after drop n, the next drop is
     predicted for the first moment the RETURNING signal e(t) = x(t - D) rises
     above thr.
@@ -115,7 +133,7 @@ def echo_forecast(x, drop_times, D, pulse_ms=10, refractory=30, thr=0.25):
         lo, hi = t + refractory, min(t + pulse_ms + d, len(x) - 1 + d)
         if hi <= lo + 1 or lo - d < 0:
             continue
-        e = x[lo - d:hi - d]
+        e = x[lo - d:hi - d] if received is None else received[lo:hi]
         above = e > thr
         # an echo that is still high when the search opens belongs to the
         # present drop; wait until it has passed, then take the next rise

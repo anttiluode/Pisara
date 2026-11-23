@@ -1,0 +1,393 @@
+{
+ "A": [
+  {
+   "seed": 51,
+   "base": 300,
+   "theta": 50,
+   "tau_learned": 59.77642968612686,
+   "acf_zero": 60,
+   "embed_learned": 0.03969866338949578,
+   "embed_short_ladder": 0.07371802910078047
+  },
+  {
+   "seed": 51,
+   "base": 300,
+   "theta": 100,
+   "tau_learned": 68.9473181133623,
+   "acf_zero": 70,
+   "embed_learned": 0.008732618597033807,
+   "embed_short_ladder": 0.04680942676212769
+  },
+  {
+   "seed": 51,
+   "base": 300,
+   "theta": 200,
+   "tau_learned": 75.76406233694703,
+   "acf_zero": 78,
+   "embed_learned": 0.012557871843651192,
+   "embed_short_ladder": 0.10015059904513952
+  },
+  {
+   "seed": 51,
+   "base": 600,
+   "theta": 100,
+   "tau_learned": 111.25719624922986,
+   "acf_zero": 116,
+   "embed_learned": 0.08335687377602329,
+   "embed_short_ladder": 0.08359071402220039
+  },
+  {
+   "seed": 51,
+   "base": 600,
+   "theta": 200,
+   "tau_learned": 124.40546661716934,
+   "acf_zero": 129,
+   "embed_learned": 0.0074624526059968105,
+   "embed_short_ladder": 0.07749661560677473
+  },
+  {
+   "seed": 52,
+   "base": 300,
+   "theta": 50,
+   "tau_learned": 59.754519050385824,
+   "acf_zero": 60,
+   "embed_learned": 0.04190134018588713,
+   "embed_short_ladder": 0.07954473503012997
+  },
+  {
+   "seed": 52,
+   "base": 300,
+   "theta": 100,
+   "tau_learned": 68.89617468510555,
+   "acf_zero": 70,
+   "embed_learned": 0.009488543459531283,
+   "embed_short_ladder": 0.05083037892982966
+  },
+  {
+   "seed": 52,
+   "base": 300,
+   "theta": 200,
+   "tau_learned": 75.67583946658127,
+   "acf_zero": 78,
+   "embed_learned": 0.013774402430910871,
+   "embed_short_ladder": 0.11080522968907744
+  },
+  {
+   "seed": 52,
+   "base": 600,
+   "theta": 100,
+   "tau_learned": 111.23999321108425,
+   "acf_zero": 116,
+   "embed_learned": 0.09105799078714592,
+   "embed_short_ladder": 0.09050967749721853
+  },
+  {
+   "seed": 52,
+   "base": 600,
+   "theta": 200,
+   "tau_learned": 124.38451874885672,
+   "acf_zero": 129,
+   "embed_learned": 0.008459898748342331,
+   "embed_short_ladder": 0.08251981335673596
+  },
+  {
+   "seed": 53,
+   "base": 300,
+   "theta": 50,
+   "tau_learned": 59.75051283652708,
+   "acf_zero": 60,
+   "embed_learned": 0.04482146889199356,
+   "embed_short_ladder": 0.08076563012714477
+  },
+  {
+   "seed": 53,
+   "base": 300,
+   "theta": 100,
+   "tau_learned": 68.89438879932048,
+   "acf_zero": 70,
+   "embed_learned": 0.009537811935086798,
+   "embed_short_ladder": 0.05048736852331263
+  },
+  {
+   "seed": 53,
+   "base": 300,
+   "theta": 200,
+   "tau_learned": 75.68089997075205,
+   "acf_zero": 78,
+   "embed_learned": 0.012753016173032386,
+   "embed_short_ladder": 0.11051485128141038
+  },
+  {
+   "seed": 53,
+   "base": 600,
+   "theta": 100,
+   "tau_learned": 111.23599204672033,
+   "acf_zero": 116,
+   "embed_learned": 0.09273676845915581,
+   "embed_short_ladder": 0.0931330244163027
+  },
+  {
+   "seed": 53,
+   "base": 600,
+   "theta": 200,
+   "tau_learned": 124.3742276908919,
+   "acf_zero": 129,
+   "embed_learned": 0.008122511574917531,
+   "embed_short_ladder": 0.08356141749681772
+  }
+ ],
+ "B": [
+  {
+   "seed": 51,
+   "in_step": [
+    {
+     "sigma": 0,
+     "echo_mae": 6.229614263868085,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 1,
+     "echo_mae": 6.241398363239292,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 2,
+     "echo_mae": 10.526527442642841,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 5,
+     "echo_mae": 51.30316468775653,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 10,
+     "echo_mae": 133.9639023020683,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 10.0
+    },
+    {
+     "sigma": 20,
+     "echo_mae": 207.21248468410442,
+     "echo_hit": 1.0,
+     "omission_rise": 0.9811320754716981,
+     "omission_onset_err": 16.5
+    },
+    {
+     "sigma": 40,
+     "echo_mae": 245.69848764427803,
+     "echo_hit": 1.0,
+     "omission_rise": 0.7358490566037735,
+     "omission_onset_err": 35.0
+    }
+   ],
+   "describing": [
+    {
+     "sigma": 0,
+     "embed_nmse": 0.008720703272427447
+    },
+    {
+     "sigma": 1,
+     "embed_nmse": 0.009496882743720972
+    },
+    {
+     "sigma": 2,
+     "embed_nmse": 0.011085237358140291
+    },
+    {
+     "sigma": 5,
+     "embed_nmse": 0.022605093524615587
+    },
+    {
+     "sigma": 10,
+     "embed_nmse": 0.04612667593398981
+    },
+    {
+     "sigma": 20,
+     "embed_nmse": 0.11070545562266303
+    },
+    {
+     "sigma": 40,
+     "embed_nmse": 0.2702253636068797
+    }
+   ]
+  },
+  {
+   "seed": 52,
+   "in_step": [
+    {
+     "sigma": 0,
+     "echo_mae": 4.492387076250715,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 1,
+     "echo_mae": 5.262033653126801,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 2,
+     "echo_mae": 9.710268273697816,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 5,
+     "echo_mae": 61.951078125284944,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 7.0
+    },
+    {
+     "sigma": 10,
+     "echo_mae": 125.92470257783364,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 8.0
+    },
+    {
+     "sigma": 20,
+     "echo_mae": 209.69141625749185,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 20.0
+    },
+    {
+     "sigma": 40,
+     "echo_mae": 245.7645484859773,
+     "echo_hit": 1.0,
+     "omission_rise": 0.7230769230769231,
+     "omission_onset_err": 43.0
+    }
+   ],
+   "describing": [
+    {
+     "sigma": 0,
+     "embed_nmse": 0.008167551641773527
+    },
+    {
+     "sigma": 1,
+     "embed_nmse": 0.008465185602186976
+    },
+    {
+     "sigma": 2,
+     "embed_nmse": 0.010414440436317512
+    },
+    {
+     "sigma": 5,
+     "embed_nmse": 0.017845313389073785
+    },
+    {
+     "sigma": 10,
+     "embed_nmse": 0.04211559585958511
+    },
+    {
+     "sigma": 20,
+     "embed_nmse": 0.11531836523784014
+    },
+    {
+     "sigma": 40,
+     "embed_nmse": 0.2729710692155264
+    }
+   ]
+  },
+  {
+   "seed": 53,
+   "in_step": [
+    {
+     "sigma": 0,
+     "echo_mae": 4.612756865054316,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 4.0
+    },
+    {
+     "sigma": 1,
+     "echo_mae": 5.387378434973845,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 2,
+     "echo_mae": 8.888613408336514,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 5.0
+    },
+    {
+     "sigma": 5,
+     "echo_mae": 53.80167065521902,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 6.0
+    },
+    {
+     "sigma": 10,
+     "echo_mae": 118.55064131794579,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 9.0
+    },
+    {
+     "sigma": 20,
+     "echo_mae": 201.5319871167826,
+     "echo_hit": 1.0,
+     "omission_rise": 1.0,
+     "omission_onset_err": 19.0
+    },
+    {
+     "sigma": 40,
+     "echo_mae": 243.51587036714744,
+     "echo_hit": 1.0,
+     "omission_rise": 0.6229508196721312,
+     "omission_onset_err": 45.0
+    }
+   ],
+   "describing": [
+    {
+     "sigma": 0,
+     "embed_nmse": 0.009551582036188468
+    },
+    {
+     "sigma": 1,
+     "embed_nmse": 0.00947432753777744
+    },
+    {
+     "sigma": 2,
+     "embed_nmse": 0.011116968759318894
+    },
+    {
+     "sigma": 5,
+     "embed_nmse": 0.020015459618293548
+    },
+    {
+     "sigma": 10,
+     "embed_nmse": 0.03843785012078558
+    },
+    {
+     "sigma": 20,
+     "embed_nmse": 0.11553604601998894
+    },
+    {
+     "sigma": 40,
+     "embed_nmse": 0.28092361287811957
+    }
+   ]
+  }
+ ]
+}

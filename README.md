@@ -181,6 +181,49 @@ The in-step loop is held back by the Gate 2 failures. On period-two it sits at t
 
 So in this model, interval forecasting is the describing loop's job. The in-step loop's remaining value is what Gate 2C showed: timing, such as rising on schedule when a drop is missing. Forecasting the size of the next interval did not test that.
 
+## Gate 5: Neon's checks (timescale, and the myelin jitter lesion)
+
+Fresh seeds 51–53.
+
+**A. Does the decorrelating delay follow the world or the leak?** Hénon intervals at base 300 and 600 ms; the observable's leak θ = 50, 100, 200 ms. The learned τ is identical across seeds:
+
+| base interval | leak θ | learned τ (offline autocorrelation zero) | embedding, learned τ…6τ | short ladder 50…300 |
+|---|---|---|---|---|
+| 300 | 50 | 60 (60) | 0.040–0.045 | 0.074–0.081 |
+| 300 | 100 | 69 (70) | **0.009–0.010** | 0.047–0.051 |
+| 300 | 200 | 76 (78) | 0.013–0.014 | 0.100–0.111 |
+| 600 | 100 | 111 (116) | 0.083–0.093 (fails) | 0.084–0.093 |
+| 600 | 200 | 124 (129) | **0.007–0.008** | 0.077–0.084 |
+
+- **Both set τ.** Doubling the interval stretched τ 1.6× (69 → 111, and 76 → 124). Doubling the leak stretched it 1.1×. So the claim "τ adapts to the world's timescale" holds only **partly**.
+- **The leak can starve the embedding.** At 600 ms intervals with a 100 ms leak, the trace has almost forgotten the previous drop before the next one comes. No choice of delays helps there: learned and ladder both fail at ≈ 0.09. With a 200 ms leak the same world embeds at 0.007–0.008.
+
+  So my Gate 3 explanation ("6τ spans two intervals") was incomplete. Memory comes from the span of the delays **and** from how long the observable itself remembers. The two have to match the world together.
+
+**B. Jitter lesion: which breaks first, being in step or describing?** Conduction timing is made unreliable: the return arrives early or late by an offset with SD σ that wanders with ~20 ms memory.
+
+- *Being in step*: period-two, loop fixed at D = 600.
+- *Describing*: Hénon, learned τ, each embedding sample read σ ms off.
+
+| jitter SD | echo forecast error | omission: rise / onset error | Hénon embedding NMSE |
+|---|---|---|---|
+| 0 ms | 4.5–6.2 ms | 100% / 4–5 ms | 0.008–0.010 |
+| 1 ms | 5.3–6.2 | 100% / 5 | 0.008–0.009 |
+| 2 ms | 8.9–10.5 | 100% / 5 | 0.010–0.011 |
+| 5 ms | **51–62** | 100% / 5–7 | 0.018–0.023 |
+| 10 ms | 119–134 | 100% / 8–10 | 0.038–0.046 |
+| 20 ms | 202–210 | 98–100% / 16–20 | 0.111–0.116 |
+| 40 ms | 244–246 | 62–74% / 35–45 | 0.270–0.281 |
+
+Neon's prediction was that being in step collapses within a few ms while describing degrades gracefully. The result is **half right**:
+- **The echo forecast collapses first**, about 10× worse at 5 ms of jitter. My probable reading, not verified: smeared recirculating echoes cross the threshold early.
+- **The omission response is the most robust of all.** It still rises at every missing drop up to 10 ms of jitter, with onset error growing roughly with the jitter itself.
+- **The embedding degrades steadily**: 2.3× worse at 5 ms, 4.5× at 10 ms.
+
+So "in step" is not one thing. A *threshold-crossing forecast* is fragile, while a *rise in the right window* is robust.
+
+A smoke run on seed 9 first used independent jitter every millisecond. That shredded the echo into spurious crossings already at 1 ms, a detector artifact, so the jitter was made coherent before the frozen run.
+
 ## Ledger (Gates 1–2)
 
 **Verified**
@@ -204,10 +247,10 @@ So in this model, interval forecasting is the describing loop's job. The in-step
 ## Next
 
 - **Luotain2 audit** of the virtual-node sheet (node × cycle as a 2D field), with Sol's control: the same audit with the node order scrambled. A law that survives scrambling came from the arrangement, not the dynamics.
-- **Delay-jitter lesion**: make conduction timing unreliable and measure how fast the anticipation collapses. This is a model property, not a model of disease.
 - **Test the in-step loop on its own job**: an omission and surprise task (detect a missing or early drop as fast as possible), where the describing loop has no natural advantage. Only there can the pair earn its keep.
 - **Fix the in-step loop's basins** (mean basin on period-two, harmonic ratchet on draining) before pairing again.
-- **Learn the multiples too**: a chain where each loop decorrelates from the one before, instead of hand-given 1…6 τ.
+- **Learn the multiples too** (Neon's "Gram–Schmidt in time"): loop k decorrelates from the present and from loops 1…k−1, and stops adding loops when the attractor has unfolded. Test on 1-D chaotic, 2-D Hénon and a 3-D world.
+- **Learn the leak too**: Gate 5A shows the observable's own memory must match the world; a rule for θ alongside τ.
 - **Matched capacity** (Dambre et al. 2012), so the loop and the window are compared at the same memory budget.
 - **A knobs page**: drag the flow and the delay, and watch the loop lock and slip.
 
@@ -220,6 +263,7 @@ python scripts/run_gate1.py        # -> results/gate1.json   (~25 s with numba)
 python scripts/run_gate2.py        # -> results/gate2.json
 python scripts/run_gate3.py        # -> results/gate3.json   (~20 s)
 python scripts/run_gate4.py        # -> results/gate4.json   (~5 s)
+python scripts/run_gate5.py        # -> results/gate5.json
 python scripts/make_figures.py     # -> fig/
 ```
 
