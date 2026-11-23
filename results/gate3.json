@@ -1,0 +1,1097 @@
+[
+ {
+  "regime": "periodic",
+  "seed": 31,
+  "learned_coincidence": 1.0958970144434912,
+  "learned_coincidence_delays": [
+   301,
+   452,
+   600,
+   900,
+   1048,
+   1199
+  ],
+  "learned_decorrelation": 1.0846550508098933,
+  "learned_decorrelation_delays": [
+   61,
+   122,
+   184,
+   245,
+   306,
+   367
+  ],
+  "acf_zero": 1.0810955467189913,
+  "acf_zero_delays": [
+   62,
+   124,
+   186,
+   248,
+   310,
+   372
+  ],
+  "range_centres": 1.050571112449145,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 1.0845953142599503,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 1.0753429383705009,
+  "coincidence_on_shuffle_delays": [
+   298,
+   446,
+   597,
+   897,
+   1051,
+   1197
+  ],
+  "decorrelation_on_shuffle": 1.0846550508098933,
+  "decorrelation_on_shuffle_delays": [
+   61,
+   123,
+   184,
+   245,
+   306,
+   368
+  ],
+  "random": 1.0593714938485541,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 61.211798368675346,
+  "tau_acf": 62,
+  "clock": 1.0,
+  "history_quadratic": 0.9987395790042182
+ },
+ {
+  "regime": "periodic",
+  "seed": 32,
+  "learned_coincidence": 1.087388759223588,
+  "learned_coincidence_delays": [
+   299,
+   447,
+   599,
+   897,
+   1043,
+   1195
+  ],
+  "learned_decorrelation": 1.0963929414102824,
+  "learned_decorrelation_delays": [
+   61,
+   122,
+   184,
+   245,
+   306,
+   367
+  ],
+  "acf_zero": 1.1016263237494017,
+  "acf_zero_delays": [
+   62,
+   124,
+   186,
+   248,
+   310,
+   372
+  ],
+  "range_centres": 1.0763738396869924,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 1.0962544689529485,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 1.0921526552706617,
+  "coincidence_on_shuffle_delays": [
+   297,
+   444,
+   596,
+   895,
+   1045,
+   1195
+  ],
+  "decorrelation_on_shuffle": 1.0957219996308794,
+  "decorrelation_on_shuffle_delays": [
+   61,
+   123,
+   184,
+   245,
+   307,
+   368
+  ],
+  "random": 1.076965469066518,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 61.190869140796494,
+  "tau_acf": 62,
+  "clock": 1.0,
+  "history_quadratic": 0.9994684747870556
+ },
+ {
+  "regime": "periodic",
+  "seed": 33,
+  "learned_coincidence": 1.1036263834121323,
+  "learned_coincidence_delays": [
+   299,
+   449,
+   601,
+   903,
+   1051,
+   1206
+  ],
+  "learned_decorrelation": 1.088400661182279,
+  "learned_decorrelation_delays": [
+   61,
+   123,
+   184,
+   245,
+   306,
+   368
+  ],
+  "acf_zero": 1.0940049293903762,
+  "acf_zero_delays": [
+   62,
+   124,
+   186,
+   248,
+   310,
+   372
+  ],
+  "range_centres": 1.1013627945145137,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 1.0859307010706873,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 1.0908087067728687,
+  "coincidence_on_shuffle_delays": [
+   298,
+   449,
+   599,
+   901,
+   1049,
+   1203
+  ],
+  "decorrelation_on_shuffle": 1.088400661182279,
+  "decorrelation_on_shuffle_delays": [
+   61,
+   123,
+   184,
+   245,
+   306,
+   368
+  ],
+  "random": 1.0911231585627847,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 61.28071472482411,
+  "tau_acf": 62,
+  "clock": 1.0,
+  "history_quadratic": 1.0004458890601138
+ },
+ {
+  "regime": "period2",
+  "seed": 31,
+  "learned_coincidence": 0.0027365869596993513,
+  "learned_coincidence_delays": [
+   282,
+   404,
+   600,
+   873,
+   1003,
+   1199
+  ],
+  "learned_decorrelation": 0.002742250166759624,
+  "learned_decorrelation_delays": [
+   66,
+   132,
+   199,
+   265,
+   331,
+   397
+  ],
+  "acf_zero": 0.002742250166759624,
+  "acf_zero_delays": [
+   67,
+   134,
+   201,
+   268,
+   335,
+   402
+  ],
+  "range_centres": 0.002709705998864359,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.0027551167816095103,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.0026911242747651516,
+  "coincidence_on_shuffle_delays": [
+   273,
+   430,
+   624,
+   840,
+   1020,
+   1220
+  ],
+  "decorrelation_on_shuffle": 0.002742250166759624,
+  "decorrelation_on_shuffle_delays": [
+   67,
+   134,
+   202,
+   269,
+   336,
+   403
+  ],
+  "random": 0.0028211971806176867,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 66.16979886235553,
+  "tau_acf": 67,
+  "clock": 1.0,
+  "history_quadratic": 0.003183283776494478
+ },
+ {
+  "regime": "period2",
+  "seed": 32,
+  "learned_coincidence": 0.002784633501684906,
+  "learned_coincidence_delays": [
+   275,
+   404,
+   599,
+   882,
+   998,
+   1195
+  ],
+  "learned_decorrelation": 0.002753382312751969,
+  "learned_decorrelation_delays": [
+   66,
+   132,
+   198,
+   265,
+   331,
+   397
+  ],
+  "acf_zero": 0.002753382312751969,
+  "acf_zero_delays": [
+   67,
+   134,
+   201,
+   268,
+   335,
+   402
+  ],
+  "range_centres": 0.002893362798529608,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.0028288516842768087,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.002891548230200892,
+  "coincidence_on_shuffle_delays": [
+   279,
+   431,
+   646,
+   857,
+   1042,
+   1263
+  ],
+  "decorrelation_on_shuffle": 0.002753382312751969,
+  "decorrelation_on_shuffle_delays": [
+   66,
+   133,
+   199,
+   265,
+   331,
+   398
+  ],
+  "random": 0.0031618143816837647,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 66.14810158557188,
+  "tau_acf": 67,
+  "clock": 1.0,
+  "history_quadratic": 0.003221209463496446
+ },
+ {
+  "regime": "period2",
+  "seed": 33,
+  "learned_coincidence": 0.002759454635311173,
+  "learned_coincidence_delays": [
+   273,
+   403,
+   601,
+   877,
+   1008,
+   1206
+  ],
+  "learned_decorrelation": 0.0026519042337411957,
+  "learned_decorrelation_delays": [
+   66,
+   132,
+   199,
+   265,
+   331,
+   397
+  ],
+  "acf_zero": 0.0026519042337411957,
+  "acf_zero_delays": [
+   67,
+   134,
+   201,
+   268,
+   335,
+   402
+  ],
+  "range_centres": 0.0027688799562589268,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.0026853121998429118,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.008041942217513028,
+  "coincidence_on_shuffle_delays": [
+   290,
+   394,
+   611,
+   847,
+   973,
+   1219
+  ],
+  "decorrelation_on_shuffle": 0.0026519042337411957,
+  "decorrelation_on_shuffle_delays": [
+   67,
+   134,
+   201,
+   268,
+   336,
+   403
+  ],
+  "random": 0.0028293548795583477,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 66.24903590834313,
+  "tau_acf": 67,
+  "clock": 1.0,
+  "history_quadratic": 0.0030604221229979856
+ },
+ {
+  "regime": "chaotic",
+  "seed": 31,
+  "learned_coincidence": 0.025011054033173517,
+  "learned_coincidence_delays": [
+   316,
+   441,
+   655,
+   873,
+   979,
+   1308
+  ],
+  "learned_decorrelation": 0.012670661506217465,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 0.012732061935390808,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 0.027601313797585698,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.012928703811152804,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.02904456306596143,
+  "coincidence_on_shuffle_delays": [
+   313,
+   419,
+   673,
+   872,
+   1032,
+   1291
+  ],
+  "decorrelation_on_shuffle": 0.01270260602888877,
+  "decorrelation_on_shuffle_delays": [
+   70,
+   140,
+   210,
+   281,
+   351,
+   421
+  ],
+  "random": 0.026204292150754212,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 68.95948756058412,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 0.032791527606282754
+ },
+ {
+  "regime": "chaotic",
+  "seed": 32,
+  "learned_coincidence": 0.0263671591668277,
+  "learned_coincidence_delays": [
+   302,
+   454,
+   662,
+   871,
+   998,
+   1316
+  ],
+  "learned_decorrelation": 0.011177067619090836,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 0.010910579065690132,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 0.023290874133394653,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.011530041435260848,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.03090844036330023,
+  "coincidence_on_shuffle_delays": [
+   295,
+   441,
+   686,
+   860,
+   1044,
+   1237
+  ],
+  "decorrelation_on_shuffle": 0.01091833751887509,
+  "decorrelation_on_shuffle_delays": [
+   70,
+   139,
+   209,
+   278,
+   348,
+   418
+  ],
+  "random": 0.022073552884508164,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 68.9272213996747,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 0.02943781296561001
+ },
+ {
+  "regime": "chaotic",
+  "seed": 33,
+  "learned_coincidence": 0.05005093658129607,
+  "learned_coincidence_delays": [
+   308,
+   445,
+   662,
+   872,
+   1005,
+   1322
+  ],
+  "learned_decorrelation": 0.014139580937364237,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 0.013948774167721768,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 0.04020359392067194,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.01463313245818668,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.03692445576742445,
+  "coincidence_on_shuffle_delays": [
+   302,
+   454,
+   620,
+   910,
+   1086,
+   1246
+  ],
+  "decorrelation_on_shuffle": 0.014139580937364237,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "random": 0.039875694666729286,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 69.02791976886044,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 0.04584374215056948
+ },
+ {
+  "regime": "draining",
+  "seed": 31,
+  "learned_coincidence": 0.02365132237813024,
+  "learned_coincidence_delays": [
+   313,
+   423,
+   630,
+   876,
+   1027,
+   1257
+  ],
+  "learned_decorrelation": 0.011292130238747295,
+  "learned_decorrelation_delays": [
+   79,
+   157,
+   236,
+   315,
+   393,
+   472
+  ],
+  "acf_zero": 0.011959908177170703,
+  "acf_zero_delays": [
+   80,
+   160,
+   240,
+   320,
+   400,
+   480
+  ],
+  "range_centres": 0.014881654721841695,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.01220812991377212,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.01782606820368458,
+  "coincidence_on_shuffle_delays": [
+   250,
+   442,
+   650,
+   818,
+   1042,
+   1241
+  ],
+  "decorrelation_on_shuffle": 0.011844248496886693,
+  "decorrelation_on_shuffle_delays": [
+   77,
+   154,
+   231,
+   308,
+   385,
+   462
+  ],
+  "random": 0.010098526694724105,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 78.68911798663427,
+  "tau_acf": 80,
+  "clock": 1.0,
+  "history_quadratic": 0.28576725383206447
+ },
+ {
+  "regime": "draining",
+  "seed": 32,
+  "learned_coincidence": 0.013250573000549642,
+  "learned_coincidence_delays": [
+   310,
+   470,
+   629,
+   889,
+   1032,
+   1247
+  ],
+  "learned_decorrelation": 0.01056511265619489,
+  "learned_decorrelation_delays": [
+   79,
+   158,
+   236,
+   315,
+   394,
+   473
+  ],
+  "acf_zero": 0.012120889322264171,
+  "acf_zero_delays": [
+   80,
+   160,
+   240,
+   320,
+   400,
+   480
+  ],
+  "range_centres": 0.05769772571908394,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.011564280774420349,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.02221002894026731,
+  "coincidence_on_shuffle_delays": [
+   250,
+   467,
+   640,
+   844,
+   1061,
+   1264
+  ],
+  "decorrelation_on_shuffle": 0.010639027605777588,
+  "decorrelation_on_shuffle_delays": [
+   78,
+   156,
+   234,
+   312,
+   390,
+   468
+  ],
+  "random": 0.01098816107094119,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 78.77598243400412,
+  "tau_acf": 80,
+  "clock": 1.0,
+  "history_quadratic": 0.27698124943362945
+ },
+ {
+  "regime": "draining",
+  "seed": 33,
+  "learned_coincidence": 0.012404583621801399,
+  "learned_coincidence_delays": [
+   310,
+   473,
+   627,
+   909,
+   1007,
+   1255
+  ],
+  "learned_decorrelation": 0.013745364321469862,
+  "learned_decorrelation_delays": [
+   79,
+   158,
+   237,
+   316,
+   394,
+   473
+  ],
+  "acf_zero": 0.013861240511619171,
+  "acf_zero_delays": [
+   80,
+   160,
+   240,
+   320,
+   400,
+   480
+  ],
+  "range_centres": 0.037398715679012276,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 0.01444732557601321,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.01808168368025052,
+  "coincidence_on_shuffle_delays": [
+   302,
+   405,
+   644,
+   854,
+   1013,
+   1259
+  ],
+  "decorrelation_on_shuffle": 0.01390164502103371,
+  "decorrelation_on_shuffle_delays": [
+   79,
+   159,
+   238,
+   317,
+   397,
+   476
+  ],
+  "random": 0.012868441509122489,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 78.8909912618544,
+  "tau_acf": 80,
+  "clock": 1.0,
+  "history_quadratic": 0.28140866356454985
+ },
+ {
+  "regime": "shuffled",
+  "seed": 31,
+  "learned_coincidence": 1.0657466811077987,
+  "learned_coincidence_delays": [
+   314,
+   424,
+   674,
+   814,
+   1010,
+   1288
+  ],
+  "learned_decorrelation": 1.0725371302544355,
+  "learned_decorrelation_delays": [
+   70,
+   140,
+   210,
+   281,
+   351,
+   421
+  ],
+  "acf_zero": 1.0737402754521788,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 1.0676049926985924,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 1.1310083009816325,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 1.080074414489045,
+  "coincidence_on_shuffle_delays": [
+   297,
+   428,
+   643,
+   884,
+   1004,
+   1241
+  ],
+  "decorrelation_on_shuffle": 1.101006762240676,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   137,
+   206,
+   275,
+   343,
+   412
+  ],
+  "random": 1.061962783698875,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 70.15864465846624,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 1.0295543911198115
+ },
+ {
+  "regime": "shuffled",
+  "seed": 32,
+  "learned_coincidence": 1.1332186478302724,
+  "learned_coincidence_delays": [
+   271,
+   418,
+   694,
+   885,
+   1043,
+   1214
+  ],
+  "learned_decorrelation": 1.1084088056426378,
+  "learned_decorrelation_delays": [
+   70,
+   139,
+   209,
+   278,
+   348,
+   418
+  ],
+  "acf_zero": 1.119357851765719,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 1.1364718682496158,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 1.1158725628550021,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 1.1485904374504292,
+  "coincidence_on_shuffle_delays": [
+   293,
+   453,
+   609,
+   898,
+   1065,
+   1211
+  ],
+  "decorrelation_on_shuffle": 1.1138287842782344,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   138,
+   206,
+   275,
+   344,
+   413
+  ],
+  "random": 1.145782524953321,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 69.60262848749582,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 1.0159912091065733
+ },
+ {
+  "regime": "shuffled",
+  "seed": 33,
+  "learned_coincidence": 1.1227867244100187,
+  "learned_coincidence_delays": [
+   302,
+   454,
+   620,
+   910,
+   1086,
+   1246
+  ],
+  "learned_decorrelation": 1.1175511149811985,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 1.1005807265225511,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 1.1066224471626571,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "fraser_swinney": 1.1080000959456893,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 1.1374455175923979,
+  "coincidence_on_shuffle_delays": [
+   259,
+   388,
+   700,
+   885,
+   1054,
+   1264
+  ],
+  "decorrelation_on_shuffle": 1.1255332077737332,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   138,
+   208,
+   277,
+   346,
+   415
+  ],
+  "random": 1.1275868121763604,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 68.95287602104469,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 1.0259585026686817
+ }
+]

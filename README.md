@@ -96,7 +96,48 @@ Seeds 21, 22, 23.
 
 **C. Omission.** In period-two, 10% of the drops were removed. The loop with a learned delay produced a rise at the time of **every** missing drop, with onset error 3.8–5.3 ms. A no-loop unit produced none. That is silence becoming a signal: the echo keeps coming when the world stops.
 
-## Ledger
+## Gate 3: can competing loops grow their own Takens embedding?
+
+**Setup.** Six loops learn their delays on the first half of each run. Without competition they all collapse onto one delay. With soft repulsion between delays they pack into a tight cluster. So the version tested gives each loop its own range: 150–350, 350–550, …, 1150–1350 ms. Think of axons of different length classes, with myelin tuning within each class.
+
+**Forecaster.** The learned delays become Takens delays for one slow observable y(t), the drops through a 100 ms leak. The next interval is forecast by nearest-neighbour analogues (k = 10) in that embedding.
+
+**Opposite rule, added for comparison.** One loop moves its delay until what *returns* is **uncorrelated** with what arrives now: gradient descent on c², with c a running correlation. This is the anti-Hebbian version of the myelin rule. Its delay τ is used as τ, 2τ, …, 6τ.
+
+**Fresh seeds 31, 32, 33**, not looked at before the run. 2000 drops each; test is the second half. NMSE per seed:
+
+| world | coincidence loops | decorrelating loop | autocorrelation zero (offline) | Fraser–Swinney | range centres | random | quadratic history |
+|---|---|---|---|---|---|---|---|
+| chaotic | 0.025 / 0.026 / 0.050 | **0.013 / 0.011 / 0.014** | 0.013 / 0.011 / 0.014 | 0.013 / 0.012 / 0.015 | 0.028 / 0.023 / 0.040 | 0.026 / 0.022 / 0.040 | 0.033 / 0.029 / 0.046 |
+| draining | 0.024 / 0.013 / 0.012 | 0.011 / 0.011 / 0.014 | 0.012 / 0.012 / 0.014 | 0.012 / 0.012 / 0.014 | 0.015 / 0.058 / 0.037 | 0.010 / 0.011 / 0.013 | 0.286 / 0.277 / 0.281 |
+| period2 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 |
+| periodic | 1.09–1.10 | 1.09–1.10 | 1.08–1.10 | 1.09–1.10 | 1.05–1.10 | 1.06–1.09 | 1.00 |
+| shuffled | 1.07–1.13 | 1.07–1.12 | 1.07–1.12 | 1.11–1.13 | 1.07–1.14 | 1.06–1.15 | 1.02–1.03 |
+
+The delay learned online by the decorrelating loop vs the autocorrelation zero computed offline, for every world and seed:
+- periodic: 61 vs 62 ms
+- period-two: 66 vs 67 ms
+- chaotic: 69 vs 70 ms
+- draining: 79 vs 80 ms
+- shuffled: 69–70 vs 70 ms
+
+**What this says.**
+- The coincidence loops spread across harmonics: ≈ 300, 450, 600, 900, 1050, 1200 ms on the clock. But those delays all sample the world at the same phase, just after a drop. They are the most *redundant* delays possible. On the chaotic faucet they embed worse than evenly spaced or even random delays, and 2–3.5× worse than the decorrelated ones.
+- The opposite rule, one local online loop, finds the classic embedding delay to within 1–2 ms. Its embedding ties the hand-computed autocorrelation-zero and Fraser–Swinney choices, and beats regression on the last 4 intervals 2.5–3× on the chaotic faucet.
+- **The hypothesis this leaves.** Timing plasticity may come in two opposite kinds for two jobs:
+  - *Hebbian / coincidence* delays for being in step (anticipation, the echo, the omission response);
+  - *anti-Hebbian / decorrelating* delays for representing the world (embedding).
+
+  This is the morning's first idea, Barlow and Földiák's anti-Hebbian decorrelation, reappearing in time instead of space. It is a hypothesis from a model, not a claim about cortex.
+
+**Caveats.**
+- The decorrelating delay learned on the **shuffled** world is the same, and works as well. The rule learns the world's *timescale* (set by the leak and the typical interval), not its order. The order is read by the nearest-neighbour forecaster.
+- The multiples 1…6 of τ were given by hand, as in classic embedding. Only τ itself is learned.
+- Draining does not discriminate: random long delays tie the best.
+- The Fraser–Swinney mutual-information curve is jagged, and its "first minimum" of 30 ms is probably a binning artifact. It still embeds about as well.
+- Periodic and shuffled: nothing beats the clock, as expected. Nearest neighbours overfit to 1.05–1.15.
+
+## Ledger (Gates 1–2)
 
 **Verified**
 - Takens-style memory works without any equation. A plain leaky node read as a window of its last W ms beat explicit regression on past intervals:
@@ -120,7 +161,8 @@ Seeds 21, 22, 23.
 
 - **Luotain2 audit** of the virtual-node sheet (node × cycle as a 2D field), with Sol's control: the same audit with the node order scrambled. A law that survives scrambling came from the arrangement, not the dynamics.
 - **Delay-jitter lesion**: make conduction timing unreliable and measure how fast the anticipation collapses. This is a model property, not a model of disease.
-- **A fix for harmonics to test**, e.g. a weak preference for the shortest delay that still coincides, or several loops competing.
+- **One neuron, both rules**: a coincidence loop (anticipation) and a decorrelating loop (representation) in the same unit. Does the pair beat either alone on the switching world?
+- **Learn the multiples too**: a chain where each loop decorrelates from the one before, instead of hand-given 1…6 τ.
 - **Matched capacity** (Dambre et al. 2012), so the loop and the window are compared at the same memory budget.
 - **A knobs page**: drag the flow and the delay, and watch the loop lock and slip.
 
@@ -128,9 +170,10 @@ Seeds 21, 22, 23.
 
 ```
 pip install -r requirements.txt
-python -m pytest -q tests          # 4 tests, < 2 s
+python -m pytest -q tests          # 5 tests, < 2 s
 python scripts/run_gate1.py        # -> results/gate1.json   (~25 s with numba)
 python scripts/run_gate2.py        # -> results/gate2.json
+python scripts/run_gate3.py        # -> results/gate3.json   (~20 s)
 python scripts/make_figures.py     # -> fig/
 ```
 

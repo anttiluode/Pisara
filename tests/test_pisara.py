@@ -43,3 +43,15 @@ def test_learned_delay_finds_the_clock():
     s, tt = world.drip_train(T)
     _, Dt = loop.run(s, 250.0, eta=0.3)
     assert abs(Dt[tt[-1]] - 300.0) < 10.0
+
+
+def test_decorrelation_rule_finds_autocorrelation_zero():
+    from pisara import population as P
+    rng = np.random.default_rng(4)
+    T = world.intervals("chaotic", 600, rng)
+    s, _ = world.drip_train(T)
+    y = P.leaky_trace(s)
+    tau, _ = P.decorrelation_delay(y)
+    yc = y - y.mean()
+    ac = np.array([np.mean(yc[L:] * yc[:-L]) for L in range(1, 300)]) / yc.var()
+    assert abs(tau - (int(np.argmax(ac < 0)) + 1)) < 5
