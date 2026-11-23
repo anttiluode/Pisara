@@ -13,6 +13,17 @@ This came out of a morning discussion (November 23, 2026) between Antti, Sol (Ch
 
 Claude built this repo. Sol is building the five-arm baseline comparison separately.
 
+## Corrections after Neon's audit (Nov 23, 2026)
+
+Neon (Gemini) audited the code and results. Everything below is fixed and re-run; the tables in this README are the corrected ones.
+
+1. **The quadratic baseline was handicapped.** Products were taken of uncentred intervals (200–400 ms), where T and T² are almost collinear, and the ridge penalty shrank the curvature away. Intervals are now centred on the training mean before products. Chaotic quadratic history went from 0.031–0.049 to **0.008–0.009 NMSE**. It now **beats** the no-loop window (0.012). My Gate 1 claim that the window "beat explicit regression on the chaotic faucet" was wrong.
+2. **Numerical blow-ups.** Standardising a virtual node that no drop reached in training divided by ~1e-12, giving test NMSE up to 2·10¹⁴ for some delays. Column scales are now floored at 1% of the largest. Gate 1 chaotic seed 13 (no-loop) went from 0.079 to **0.0125**: the old value was a validation pick hurt by the blow-up.
+3. **The omission result depended on the starting delay.** Gate 2C started the loop at 520 ms, inside the good basin. Now it starts from every value 150–900 ms. It works (rise at >90% of missing drops, median onset error < 15 ms) from **81% / 38% / 38%** of starts on seeds 21/22/23; the rest fall into the mean basin. New control, a damped resonator kicked by the drops, with its period chosen on half the omissions: it also rises at missing drops (91–100%), but at the wrong time, median error **52–68 ms**. A resonator tuned to the 600 ms repeat did not work at all (rise at 5–23%). Where the loop locks, its 4–5 ms timing is something the resonator cannot do.
+4. **Gate 3's chaotic win was mostly coverage.** The coincidence loops had no delays below ~260 ms, while one interval of history is all the 1-D chaotic map needs. A fixed short ladder (50…300 ms) ties the learned decorrelation delay there (0.012–0.014). So Gate 3 was re-run with a **two-dimensional** world, the Hénon map (the next interval needs the last two). There the learned τ matters (table below).
+
+Neon also suggested "one neuron, both rules"; that is Gate 4 (killed).
+
 ## The machine
 
 ```
@@ -38,6 +49,7 @@ Following Shaw (`pisara/world.py`):
 | periodic | water clock, 300 ms, 1% jitter | 0.00 bits |
 | period2 | 240 / 360 ms alternating | 0.82 bits |
 | chaotic | Shaw's Fig. 4 map, x' = 3.6 x (1 − x) + 0.02 noise, T = 200–400 ms | 2.27 bits |
+| henon | x' = y + 1 − 1.4x², y' = 0.3x, T = 300 + 75x ms (2-D chaos, Shaw's Fig. 5 family) | 1.77 bits |
 | draining | coffee filter, rate ∝ √level, refilled when slow | 2.39 bits |
 | shuffled | chaotic intervals, order destroyed | 0.01 bits |
 | iid | uniform 200–400 ms | 0.00 bits |
@@ -54,8 +66,9 @@ NMSE means the error divided by the variance of the next interval. 1.0 is no bet
 |---|---:|---:|---:|---:|---:|
 | periodic | 1.00 | 1.00–1.02 | 1.00–1.02 | 1.00–1.01 | 0.98–1.08 |
 | period2 | 1.00 | 0.003 | 0.003 | **0.002–0.003** | 0.003–0.004 |
-| chaotic | 1.00 | 0.25–0.35 | 0.031–0.049 | **0.012, 0.012, 0.079** | 0.07–0.14 |
-| draining | 1.00 | 0.54–0.55 | 0.27–0.28 | **0.18–0.20** | 0.28–0.37 |
+| chaotic | 1.00 | 0.25–0.35 | **0.008–0.009** | 0.012–0.013 | 0.07–0.14 |
+| henon | 1.00 | 0.79 | **0.006–0.008** | 0.038–0.040 | 0.22–0.34 |
+| draining | 1.00 | 0.54–0.55 | 0.25–0.29 | **0.18–0.20** | 0.28–0.37 |
 | shuffled | 1.00 | 1.00–1.02 | 1.02–1.03 | 1.08–1.12 | 1.06–1.10 |
 | iid | 1.00 | 1.00–1.03 | 1.01–1.04 | 1.00–1.04 | 0.99–1.12 |
 
@@ -65,8 +78,8 @@ Echo forecast with no readout, mean absolute timing error in ms (D chosen on val
 |---|---:|---:|---:|
 | periodic | 2.3–2.4 | 2.3–2.4 | 2.8–2.9 (D = 300) |
 | period2 | 60 | 2.5–2.7 | **3.7–4.0 (D = 600 = 240 + 360)** |
-| chaotic | 38 | 6.1–6.8 | 50–80 (fails) |
-| draining | 80–81 | 32.5–32.7 | 232–235 (fails) |
+| chaotic | 38 | 3.2 | 50–80 (fails) |
+| draining | 80–81 | 31–33 | 232–235 (fails) |
 
 ![period-two echo](fig/period2_echo.png)
 
@@ -94,7 +107,7 @@ Seeds 21, 22, 23.
 
 ![learned delay](fig/learned_delay_switch.png)
 
-**C. Omission.** In period-two, 10% of the drops were removed. The loop with a learned delay produced a rise at the time of **every** missing drop, with onset error 3.8–5.3 ms. A no-loop unit produced none. That is silence becoming a signal: the echo keeps coming when the world stops.
+**C. Omission.** In period-two, 10% of the drops were removed. Started at 520 ms, the loop with a learned delay rose at the time of **every** missing drop, onset error 3.8–5.3 ms; a no-loop unit produced none. Started from anywhere in 150–900 ms, it works from 81% / 38% / 38% of starts (the rest sit in the mean basin). A damped resonator kicked by the drops also rises at missing drops but 52–68 ms off. That is silence becoming a signal, *when the loop is in the right basin*.
 
 ## Gate 3: can competing loops grow their own Takens embedding?
 
@@ -106,24 +119,28 @@ Seeds 21, 22, 23.
 
 **Fresh seeds 31, 32, 33**, not looked at before the run. 2000 drops each; test is the second half. NMSE per seed:
 
-| world | coincidence loops | decorrelating loop | autocorrelation zero (offline) | Fraser–Swinney | range centres | random | quadratic history |
-|---|---|---|---|---|---|---|---|
-| chaotic | 0.025 / 0.026 / 0.050 | **0.013 / 0.011 / 0.014** | 0.013 / 0.011 / 0.014 | 0.013 / 0.012 / 0.015 | 0.028 / 0.023 / 0.040 | 0.026 / 0.022 / 0.040 | 0.033 / 0.029 / 0.046 |
-| draining | 0.024 / 0.013 / 0.012 | 0.011 / 0.011 / 0.014 | 0.012 / 0.012 / 0.014 | 0.012 / 0.012 / 0.014 | 0.015 / 0.058 / 0.037 | 0.010 / 0.011 / 0.013 | 0.286 / 0.277 / 0.281 |
-| period2 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 |
-| periodic | 1.09–1.10 | 1.09–1.10 | 1.08–1.10 | 1.09–1.10 | 1.05–1.10 | 1.06–1.09 | 1.00 |
-| shuffled | 1.07–1.13 | 1.07–1.12 | 1.07–1.12 | 1.11–1.13 | 1.07–1.14 | 1.06–1.15 | 1.02–1.03 |
+| world | coincidence loops | decorrelating loop | autocorrelation zero (offline) | Fraser–Swinney | short ladder 50…300 | range centres | random | quadratic history |
+|---|---|---|---|---|---|---|---|---|
+| **henon (2-D)** | 0.018 / 0.017 / 0.020 | **0.008 / 0.009 / 0.008** | 0.009 / 0.009 / 0.009 | 0.082 / 0.083 / 0.082 | 0.049 / 0.049 / 0.052 | 0.028 / 0.034 / 0.031 | 0.025 / 0.025 / 0.042 | 0.007 / 0.008 / 0.008 |
+| chaotic | 0.025 / 0.026 / 0.050 | 0.013 / 0.011 / 0.014 | 0.013 / 0.011 / 0.014 | 0.013 / 0.012 / 0.015 | 0.013 / 0.012 / 0.014 | 0.028 / 0.023 / 0.040 | 0.026 / 0.022 / 0.040 | **0.009 / 0.009 / 0.009** |
+| draining | 0.024 / 0.013 / 0.012 | 0.011 / 0.011 / 0.014 | 0.012 / 0.012 / 0.014 | 0.012 / 0.012 / 0.014 | 0.012 / 0.011 / 0.014 | 0.015 / 0.058 / 0.037 | 0.010 / 0.011 / 0.013 | 0.277 / 0.266 / 0.267 |
+| period2 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 |
+| periodic | 1.09–1.10 | 1.09–1.10 | 1.08–1.10 | 1.09–1.10 | 1.08–1.10 | 1.05–1.10 | 1.06–1.09 | 1.00–1.02 |
+| shuffled | 1.07–1.13 | 1.07–1.12 | 1.07–1.12 | 1.11–1.13 | 1.09–1.12 | 1.07–1.14 | 1.06–1.15 | 1.03–1.04 |
 
 The delay learned online by the decorrelating loop vs the autocorrelation zero computed offline, for every world and seed:
 - periodic: 61 vs 62 ms
 - period-two: 66 vs 67 ms
 - chaotic: 69 vs 70 ms
+- henon: 69 vs 70 ms
 - draining: 79 vs 80 ms
 - shuffled: 69–70 vs 70 ms
 
 **What this says.**
-- The coincidence loops spread across harmonics: ≈ 300, 450, 600, 900, 1050, 1200 ms on the clock. But those delays all sample the world at the same phase, just after a drop. They are the most *redundant* delays possible. On the chaotic faucet they embed worse than evenly spaced or even random delays, and 2–3.5× worse than the decorrelated ones.
-- The opposite rule, one local online loop, finds the classic embedding delay to within 1–2 ms. Its embedding ties the hand-computed autocorrelation-zero and Fraser–Swinney choices, and beats regression on the last 4 intervals 2.5–3× on the chaotic faucet.
+- The coincidence loops spread across harmonics: ≈ 300, 450, 600, 900, 1050, 1200 ms on the clock. But those delays all sample the world at the same phase, just after a drop. They are the most *redundant* delays possible, and they embed worse than the decorrelated delays everywhere (about 2× on both chaotic worlds).
+- The opposite rule, one local online loop, finds the classic embedding delay to within 1–2 ms.
+- **On the 1-D chaotic map this does not matter**: any dense short ladder ties it, and the centred quadratic regression beats every embedding (0.009 vs 0.011–0.014). That earlier win was coverage (Neon's correction 4).
+- **On the 2-D Hénon world the learned τ does matter**: 0.008–0.009, against 0.049–0.052 for the fixed short ladder, 0.082 for Fraser–Swinney (its jagged 30 ms τ is too short), 0.017–0.020 for the coincidence loops and 0.025–0.042 for random delays. It ties the quadratic regression on the last 4 intervals (0.007–0.008), which has the true model's form built in; the embedding was not told the form. Honest reading: 6τ ≈ 415 ms spans the last two intervals, the ladder (300 ms) only one. The rule's value is that its span scales with the world's timescale on its own; the number of multiples (6) was still chosen by hand.
 - **The hypothesis this leaves.** Timing plasticity may come in two opposite kinds for two jobs:
   - *Hebbian / coincidence* delays for being in step (anticipation, the echo, the omission response);
   - *anti-Hebbian / decorrelating* delays for representing the world (embedding).
@@ -167,21 +184,21 @@ So in this model, interval forecasting is the describing loop's job. The in-step
 ## Ledger (Gates 1–2)
 
 **Verified**
-- Takens-style memory works without any equation. A plain leaky node read as a window of its last W ms beat explicit regression on past intervals:
-  - chaotic faucet: 0.012 NMSE in 2 of 3 seeds, vs 0.031–0.049 for quadratic regression on the last 4 intervals;
-  - draining filter: 0.18–0.20 vs 0.27–0.28.
+- Takens-style memory works without any equation. A plain leaky node read as a window of its last W ms, with a linear readout:
+  - draining filter: 0.18–0.20 NMSE vs 0.25–0.29 for (centred) quadratic regression on the last 4 intervals; the refill cliff is not quadratic;
+  - chaotic faucet: 0.012–0.013, close to but **worse than** the centred quadratic regression (0.008–0.009), which has the map's true form (corrected after Neon's audit).
 
-  The timing of the last drops becomes a *place* in the window, and a linear readout of the place handles the nonlinear map.
+  The timing of the last drops becomes a *place* in the window, and a linear readout of the place handles nonlinear maps without being told their form.
 - With no readout at all, the loop's own echo forecasts the period-two faucet to within 3.7–4.0 ms (clock: 60 ms). It does this when D equals the full 600 ms repeat: the echo of the drop two back arrives with the next drop.
 - The coincidence rule learns the clock period from anywhere within about ±150 ms of it. It follows a jump from 300 to 420 ms within a few drops, where any single fixed delay fails (240 ms error).
-- Omitted drops produce on-time rises (Part C).
+- Omitted drops produce on-time rises (Part C) when the loop is in the right basin (38–81% of starts); a resonator rises too but 52–68 ms off.
 - Controls: on shuffled and iid intervals, no method beats the clock. The readouts overfit slightly, to NMSE 1.06–1.12.
 
 **Failed or open**
 - **The recirculation did not help the readout.** The tuft loop scored worse than the no-loop window on chaotic and draining, and tied on period-two. Its echoes clutter the window. Its value here is only the readout-free echo and the omission response.
 - **Harmonics.** The learned delay cannot tell T from 2T or 3T, and on period-two it often settles at the mean (37 ms error) instead of the 600 ms repeat. On the draining filter it climbs harmonics and never comes back, even when the world returns to a 300 ms clock. Kill condition for this world: met.
 - **The echo cannot follow chaos** (50–80 ms, worse than the clock). A single fixed delay is a clock with one period. It can carry period-two but not a map.
-- The omission control is weak. A unit with no loop cannot rise without input at all, so it fails by construction. The stronger control, a more excitable unit with a short adaptation current, is not done yet.
+- The excitable no-loop control fails by construction; the resonator control (added after Neon's audit) is the meaningful one.
 - Not blind. The settings (echo threshold 0.25, ±150 ms window, η = 0.3, β = 0.9, θ = 5 ms) were chosen while looking at traces from seeds 0–3 and **seed 11**, which is also the first Gate 1 seed. Seed 21 was used for one trial run of Gate 2 before the final run, with no settings changed after it. Fresh seeds are the next honest step.
 
 ## Next

@@ -79,7 +79,7 @@ def run(regime, seed, n_drops):
     res["echo_mae"], res["echo_D"], res["echo_hit"] = be["echo_test_mae"], be["D"], be["echo_hit"]
     res["clock_mae"] = float(np.mean(np.abs(T[tr].mean() - T[te])))
     res["quad_mae"] = None  # filled below
-    X, y, idx = measures.lagged(T, 4, True)        # row j predicts T[idx[j]+1] from T[idx[j]], ...
+    X, y, idx = measures.lagged(T, 4, True, center=T[tr].mean())   # row j predicts T[idx[j]+1] from T[idx[j]], ...
     row = {n + 1: j for j, n in enumerate(idx)}     # keyed by the drop whose interval is forecast
     a_ = [row[n] for n in tr if n in row]; b_ = [row[n] for n in te if n in row]
     m = measures.ridge_fit(X[a_], y[a_])

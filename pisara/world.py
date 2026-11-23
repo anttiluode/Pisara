@@ -11,7 +11,7 @@ have the same interval distribution as a structured world but no structure.
 """
 import numpy as np
 
-REGIMES = ["periodic", "period2", "chaotic", "draining", "shuffled", "iid"]
+REGIMES = ["periodic", "period2", "chaotic", "henon", "draining", "shuffled", "iid"]
 
 
 def intervals(regime, n, rng, base=300.0):
@@ -27,6 +27,14 @@ def intervals(regime, n, rng, base=300.0):
             x = 3.6 * x * (1 - x) + 0.02 * rng.normal()
             x = min(max(x, 0.01), 0.99)
             out[i] = 200.0 + 200.0 * x
+        return out
+    if regime == "henon":             # two-dimensional chaos: the next interval needs the last TWO
+        # Shaw's Fig. 5 uses a Henon map in his own scaling; the printed
+        # constants diverge from a generic start, so the standard map is used
+        x, y, out = 0.1, 0.0, np.empty(n)
+        for i in range(n):
+            x, y = y + 1 - 1.4 * x * x, 0.3 * x
+            out[i] = base + 75.0 * x + rng.normal(0, 2.0)
         return out
     if regime == "draining":          # coffee filter: rate ~ sqrt(level), refilled when slow
         out, h = np.empty(n), 1.0

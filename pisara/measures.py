@@ -4,7 +4,10 @@ import numpy as np
 
 def ridge_fit(X, y, lam=1e-3):
     """Ridge on standardised columns; lam is relative to the mean eigenvalue."""
-    mu, sd = X.mean(0), X.std(0) + 1e-12
+    mu, sd = X.mean(0), X.std(0)
+    # floor: a column that barely moved in training (a virtual node no drop
+    # ever reached) must not be blown up by 1/sd at test time
+    sd = np.maximum(sd, 1e-2 * sd.max() + 1e-12)
     Z = (X - mu) / sd
     A = Z.T @ Z
     A += lam * np.trace(A) / len(A) * np.eye(len(A))
@@ -27,11 +30,15 @@ def split(n, train_frac=0.6, val_frac=0.0):
     return np.arange(a), np.arange(a, n)
 
 
-def lagged(T, k, quad=False):
+def lagged(T, k, quad=False, center=None):
     """Rows n: [T_n, T_{n-1}, ..., T_{n-k+1}] (and pairwise products if quad).
-    Target is T_{n+1}. Row n is usable for n >= k-1 and n+1 < len(T)."""
+    Target is T_{n+1}. Row n is usable for n >= k-1 and n+1 < len(T).
+    Products are taken of intervals minus `center` (pass the training mean):
+    uncentred, T and T^2 are almost collinear on 200-400 ms and ridge shrinks
+    the curvature away."""
     idx = np.arange(k - 1, len(T) - 1)
-    X = np.stack([T[idx - j] for j in range(k)], 1)
+    c = 0.0 if center is None else center
+    X = np.stack([T[idx - j] - c for j in range(k)], 1)
     if quad:
         P = [X[:, i] * X[:, j] for i in range(k) for j in range(i, k)]
         X = np.c_[X, np.stack(P, 1)]
@@ -65,7 +72,7 @@ def interval_baselines(T, train_idx_rows, test_idx_rows, k=4):
     out["clock"] = nmse(np.full(len(te), T[tr + 1].mean()), T[te + 1])
     out["last_interval"] = nmse(T[te], T[te + 1])
     for name, quad in [("history_linear", False), ("history_quadratic", True)]:
-        X, y, idx = lagged(T, k, quad)
+        X, y, idx = lagged(T, k, quad, center=T[tr].mean())
         row = {n: i for i, n in enumerate(idx)}
         a = [row[n] for n in tr if n in row]
         b = [row[n] for n in te if n in row]

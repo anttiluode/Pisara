@@ -15,6 +15,9 @@ Same embedding, same forecaster, these delay sets:
   acf_zero         the same, with tau = first zero of the autocorrelation
                    computed offline (the hand-made answer the rule should find)
   range_centres    250, 450, ..., 1250: same ranges, no learning
+  short_ladder     50, 100, ..., 300: a dense fixed ladder inside one interval
+                   (Neon's coverage control: is it the learned tau, or just
+                   having short delays at all?)
   fraser_swinney   multiples of the first minimum of I(y(t); y(t - tau))
   random           uniform in 150-1350 ms (mean of 5 draws)
   *_on_shuffle     delays learned by each rule on the SAME world with its
@@ -70,6 +73,7 @@ def run(regime, seed, n):
     tau_a = int(np.argmax(ac < 0)) + 1
     sets["acf_zero"] = tau_a * np.arange(1, 7)
     sets["range_centres"] = CENTRES
+    sets["short_ladder"] = 50.0 * np.arange(1, 7)
     mi = P.mutual_information_curve(y[:learn_until], LAGS)
     tau = P.first_minimum(mi, LAGS)
     sets["fraser_swinney"] = tau * np.arange(1, 7)
@@ -96,7 +100,7 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="+", default=[31, 32, 33])
     ap.add_argument("--drops", type=int, default=2000)
     ap.add_argument("--regimes", nargs="+",
-                    default=["periodic", "period2", "chaotic", "draining", "shuffled"])
+                    default=["periodic", "period2", "chaotic", "henon", "draining", "shuffled"])
     ap.add_argument("--out", default="results/gate3.json")
     args = ap.parse_args()
     out = []
@@ -108,7 +112,7 @@ def main():
                   f"{r['learned_coincidence_delays']} | decorrelation {r['learned_decorrelation']:.3f} "
                   f"(tau {r['tau_learned']:.0f}) | acf-zero {r['acf_zero']:.3f} (tau {r['tau_acf']}) | "
                   f"FS {r['fraser_swinney']:.3f} (tau {r['fraser_swinney_tau']}) | "
-                  f"centres {r['range_centres']:.3f} | random {r['random']:.3f} | "
+                  f"centres {r['range_centres']:.3f} | ladder {r['short_ladder']:.3f} | random {r['random']:.3f} | "
                   f"coinc-on-shuffle {r['coincidence_on_shuffle']:.3f} | "
                   f"decor-on-shuffle {r['decorrelation_on_shuffle']:.3f} | "
                   f"quad history {r['history_quadratic']:.3f}", flush=True)

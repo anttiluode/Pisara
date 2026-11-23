@@ -105,6 +105,31 @@ def part_b(seed):
     return res
 
 
+def resonator(s, period, zeta=0.08, gain=0.5):
+    """Control for the omission test (Neon): a damped oscillator kicked by
+    the drops. It also keeps ringing when a drop is missing."""
+    w = 2 * np.pi / period
+    v = np.zeros(len(s)); u = 0.0
+    for t in range(1, len(s)):
+        u += -w * w * v[t - 1] - 2 * zeta * w * u + gain * s[t - 1]
+        v[t] = v[t - 1] + u
+    return v
+
+
+def omission_score(act, omitted, thr=0.25):
+    """Normalise by the unit's typical drop response (95th percentile); a
+    'rise' is a crossing of thr within +-100 ms of the missing drop."""
+    a = act / (np.percentile(act, 95) + 1e-12)
+    errs, rises = [], 0
+    for t in omitted:
+        seg = a[t - 100:t + 100]
+        up = np.nonzero((seg[1:] > thr) & (seg[:-1] <= thr))[0]
+        if len(up):
+            rises += 1
+            errs.append(abs(up[np.argmin(np.abs(up + 1 - 100))] + 1 - 100))
+    return rises / max(len(omitted), 1), (float(np.median(errs)) if errs else None)
+
+
 def part_c(seed, n=600, p_omit=0.1):
     rng = np.random.default_rng(seed)
     T = world.intervals("period2", n, rng)
@@ -116,6 +141,31 @@ def part_c(seed, n=600, p_omit=0.1):
     for t in tt[keep]:
         s2[t:t + 10] = 1.0
     out = {"seed": seed, "n_omitted": int(len(omitted))}
+    late = omitted[omitted > tt[len(tt) // 3]]
+    half = len(late) // 2
+    # Neon's basin point: start the learned delay everywhere, not only at 520
+    sweep = []
+    for D0 in INITS:
+        x, Dt = loop.run(s2, float(D0), eta=ETA)
+        frac, err = omission_score(x, late)
+        sweep.append({"D0": D0, "D_final": float(Dt[-1]), "rise_fraction": frac, "median_onset_error": err})
+    out["learned_from_every_start"] = sweep
+    good = [r for r in sweep if r["rise_fraction"] > 0.9 and (r["median_onset_error"] or 99) < 15]
+    out["fraction_of_starts_that_work"] = len(good) / len(sweep)
+    # resonator control: pick the period on the first half of omissions, score the second
+    best = None
+    for P in range(200, 801, 10):
+        v = resonator(s2, P)
+        f, e = omission_score(v, late[:half])
+        sc = (-f, e if e is not None else 99)
+        if best is None or sc < best[0]:
+            best = (sc, P)
+    v = resonator(s2, best[1])
+    f, e = omission_score(v, late[half:])
+    out["resonator"] = {"period": best[1], "rise_fraction": f, "median_onset_error": e}
+    print(f"C seed {seed}: learned loop works from {100 * out['fraction_of_starts_that_work']:.0f}% of starts "
+          f"(finals {sorted({round(r['D_final']) for r in sweep})}); resonator P={best[1]}: rise "
+          f"{100 * f:.0f}%, median onset error {e} ms", flush=True)
     for name, beta, eta, D0 in [("loop_learned", 0.9, ETA, 520.0), ("no_loop", 0.0, 0.0, 600.0)]:
         x, Dt = loop.run(s2, D0, beta=beta, eta=eta)
         late = omitted[omitted > tt[len(tt) // 3]]

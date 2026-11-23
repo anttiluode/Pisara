@@ -38,6 +38,15 @@
    1050,
    1250
   ],
+  "short_ladder": 1.0842537174063176,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 1.0845953142599503,
   "fraser_swinney_delays": [
    30,
@@ -70,7 +79,7 @@
   "tau_learned": 61.211798368675346,
   "tau_acf": 62,
   "clock": 1.0,
-  "history_quadratic": 0.9987395790042182
+  "history_quadratic": 1.0047899892278043
  },
  {
   "regime": "periodic",
@@ -111,6 +120,15 @@
    1050,
    1250
   ],
+  "short_ladder": 1.0949012550072605,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 1.0962544689529485,
   "fraser_swinney_delays": [
    30,
@@ -143,7 +161,7 @@
   "tau_learned": 61.190869140796494,
   "tau_acf": 62,
   "clock": 1.0,
-  "history_quadratic": 0.9994684747870556
+  "history_quadratic": 1.0032830091692886
  },
  {
   "regime": "periodic",
@@ -184,6 +202,15 @@
    1050,
    1250
   ],
+  "short_ladder": 1.0860573541842287,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 1.0859307010706873,
   "fraser_swinney_delays": [
    30,
@@ -216,7 +243,7 @@
   "tau_learned": 61.28071472482411,
   "tau_acf": 62,
   "clock": 1.0,
-  "history_quadratic": 1.0004458890601138
+  "history_quadratic": 1.0151762433518132
  },
  {
   "regime": "period2",
@@ -257,6 +284,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.002755080028040961,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.0027551167816095103,
   "fraser_swinney_delays": [
    30,
@@ -289,7 +325,7 @@
   "tau_learned": 66.16979886235553,
   "tau_acf": 67,
   "clock": 1.0,
-  "history_quadratic": 0.003183283776494478
+  "history_quadratic": 0.0032187785382506605
  },
  {
   "regime": "period2",
@@ -330,6 +366,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.0028288516842768087,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.0028288516842768087,
   "fraser_swinney_delays": [
    30,
@@ -362,7 +407,7 @@
   "tau_learned": 66.14810158557188,
   "tau_acf": 67,
   "clock": 1.0,
-  "history_quadratic": 0.003221209463496446
+  "history_quadratic": 0.0032292007814980015
  },
  {
   "regime": "period2",
@@ -403,6 +448,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.0026853121998429118,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.0026853121998429118,
   "fraser_swinney_delays": [
    30,
@@ -435,7 +489,7 @@
   "tau_learned": 66.24903590834313,
   "tau_acf": 67,
   "clock": 1.0,
-  "history_quadratic": 0.0030604221229979856
+  "history_quadratic": 0.0030769031314790275
  },
  {
   "regime": "chaotic",
@@ -476,6 +530,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.01283649510311771,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.012928703811152804,
   "fraser_swinney_delays": [
    30,
@@ -508,7 +571,7 @@
   "tau_learned": 68.95948756058412,
   "tau_acf": 70,
   "clock": 1.0,
-  "history_quadratic": 0.032791527606282754
+  "history_quadratic": 0.009336210106367654
  },
  {
   "regime": "chaotic",
@@ -549,6 +612,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.011574974362788601,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.011530041435260848,
   "fraser_swinney_delays": [
    30,
@@ -581,7 +653,7 @@
   "tau_learned": 68.9272213996747,
   "tau_acf": 70,
   "clock": 1.0,
-  "history_quadratic": 0.02943781296561001
+  "history_quadratic": 0.00911154859772875
  },
  {
   "regime": "chaotic",
@@ -622,6 +694,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.014494292302686588,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.01463313245818668,
   "fraser_swinney_delays": [
    30,
@@ -654,7 +735,253 @@
   "tau_learned": 69.02791976886044,
   "tau_acf": 70,
   "clock": 1.0,
-  "history_quadratic": 0.04584374215056948
+  "history_quadratic": 0.009460568716907921
+ },
+ {
+  "regime": "henon",
+  "seed": 31,
+  "learned_coincidence": 0.017574694914743165,
+  "learned_coincidence_delays": [
+   262,
+   438,
+   674,
+   853,
+   1091,
+   1252
+  ],
+  "learned_decorrelation": 0.00822158305172416,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 0.008573620804483801,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 0.027617296781812652,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "short_ladder": 0.049266147268318135,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
+  "fraser_swinney": 0.0817913458280417,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.03955925414895102,
+  "coincidence_on_shuffle_delays": [
+   319,
+   434,
+   648,
+   890,
+   998,
+   1265
+  ],
+  "decorrelation_on_shuffle": 0.00822158305172416,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   413
+  ],
+  "random": 0.024685751680073083,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 68.93634413435151,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 0.007466115109871167
+ },
+ {
+  "regime": "henon",
+  "seed": 32,
+  "learned_coincidence": 0.017461540095964883,
+  "learned_coincidence_delays": [
+   261,
+   437,
+   671,
+   851,
+   1064,
+   1251
+  ],
+  "learned_decorrelation": 0.00895438850270066,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 0.009430420584407982,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 0.034127727174303325,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "short_ladder": 0.0493506039333531,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
+  "fraser_swinney": 0.08263295940476272,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.03365286946781203,
+  "coincidence_on_shuffle_delays": [
+   324,
+   457,
+   668,
+   829,
+   1008,
+   1308
+  ],
+  "decorrelation_on_shuffle": 0.009245712992879867,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   139,
+   208,
+   278,
+   347,
+   416
+  ],
+  "random": 0.02539717537281559,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 68.93498890078078,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 0.007607719010461369
+ },
+ {
+  "regime": "henon",
+  "seed": 33,
+  "learned_coincidence": 0.020265026288728265,
+  "learned_coincidence_delays": [
+   261,
+   438,
+   679,
+   855,
+   1074,
+   1258
+  ],
+  "learned_decorrelation": 0.008379763385724744,
+  "learned_decorrelation_delays": [
+   69,
+   138,
+   207,
+   276,
+   345,
+   414
+  ],
+  "acf_zero": 0.00866514758774684,
+  "acf_zero_delays": [
+   70,
+   140,
+   210,
+   280,
+   350,
+   420
+  ],
+  "range_centres": 0.031149248710558502,
+  "range_centres_delays": [
+   250,
+   450,
+   650,
+   850,
+   1050,
+   1250
+  ],
+  "short_ladder": 0.05164398185180077,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
+  "fraser_swinney": 0.08230533010078962,
+  "fraser_swinney_delays": [
+   30,
+   60,
+   90,
+   120,
+   150,
+   180
+  ],
+  "coincidence_on_shuffle": 0.024111528945658475,
+  "coincidence_on_shuffle_delays": [
+   263,
+   439,
+   635,
+   838,
+   1012,
+   1240
+  ],
+  "decorrelation_on_shuffle": 0.008197009020460907,
+  "decorrelation_on_shuffle_delays": [
+   69,
+   137,
+   206,
+   275,
+   344,
+   412
+  ],
+  "random": 0.04249250759518151,
+  "fraser_swinney_tau": 30,
+  "tau_learned": 68.95815309054262,
+  "tau_acf": 70,
+  "clock": 1.0,
+  "history_quadratic": 0.007688422870924353
  },
  {
   "regime": "draining",
@@ -695,6 +1022,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.01175435492132029,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.01220812991377212,
   "fraser_swinney_delays": [
    30,
@@ -727,7 +1063,7 @@
   "tau_learned": 78.68911798663427,
   "tau_acf": 80,
   "clock": 1.0,
-  "history_quadratic": 0.28576725383206447
+  "history_quadratic": 0.2768494887192853
  },
  {
   "regime": "draining",
@@ -768,6 +1104,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.01102993606595246,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.011564280774420349,
   "fraser_swinney_delays": [
    30,
@@ -800,7 +1145,7 @@
   "tau_learned": 78.77598243400412,
   "tau_acf": 80,
   "clock": 1.0,
-  "history_quadratic": 0.27698124943362945
+  "history_quadratic": 0.2659450043569273
  },
  {
   "regime": "draining",
@@ -841,6 +1186,15 @@
    1050,
    1250
   ],
+  "short_ladder": 0.013821169428353484,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 0.01444732557601321,
   "fraser_swinney_delays": [
    30,
@@ -873,7 +1227,7 @@
   "tau_learned": 78.8909912618544,
   "tau_acf": 80,
   "clock": 1.0,
-  "history_quadratic": 0.28140866356454985
+  "history_quadratic": 0.267095625282781
  },
  {
   "regime": "shuffled",
@@ -914,6 +1268,15 @@
    1050,
    1250
   ],
+  "short_ladder": 1.1204968719935824,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 1.1310083009816325,
   "fraser_swinney_delays": [
    30,
@@ -946,7 +1309,7 @@
   "tau_learned": 70.15864465846624,
   "tau_acf": 70,
   "clock": 1.0,
-  "history_quadratic": 1.0295543911198115
+  "history_quadratic": 1.04443488548994
  },
  {
   "regime": "shuffled",
@@ -987,6 +1350,15 @@
    1050,
    1250
   ],
+  "short_ladder": 1.094168854001165,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 1.1158725628550021,
   "fraser_swinney_delays": [
    30,
@@ -1019,7 +1391,7 @@
   "tau_learned": 69.60262848749582,
   "tau_acf": 70,
   "clock": 1.0,
-  "history_quadratic": 1.0159912091065733
+  "history_quadratic": 1.024967220732441
  },
  {
   "regime": "shuffled",
@@ -1060,6 +1432,15 @@
    1050,
    1250
   ],
+  "short_ladder": 1.1021199032790927,
+  "short_ladder_delays": [
+   50,
+   100,
+   150,
+   200,
+   250,
+   300
+  ],
   "fraser_swinney": 1.1080000959456893,
   "fraser_swinney_delays": [
    30,
@@ -1092,6 +1473,6 @@
   "tau_learned": 68.95287602104469,
   "tau_acf": 70,
   "clock": 1.0,
-  "history_quadratic": 1.0259585026686817
+  "history_quadratic": 1.0302924009404004
  }
 ]
